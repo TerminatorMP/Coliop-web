@@ -1,0 +1,12 @@
+.header {
+  display: flex;
+  align-items: center;
+  height: var(--header-height);
+  background-color: var(--bg-dark);
+  padding: 0 2rem;
+}
+
+.logo {
+  height: 5rem;
+  width: auto;
+}
