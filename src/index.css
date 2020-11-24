@@ -20,6 +20,7 @@
 html {
   font-family: 'Helvetica','Arial', 'sans-serif';
   font-size: 62.5%;
+  background-color: var(--bg-dark);
 }
 
 .app {

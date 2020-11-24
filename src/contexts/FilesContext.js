@@ -23,22 +23,29 @@ const Files = ({ children }) => {
   const createFile = (fileName) => {
     let newFileObject = {
       name: `${fileName}`,
-      session: Ace.createEditSession("Ich bin in Test"),
+      session: Ace.createEditSession("Neue Datei"),
     }
     setFiles([...files, newFileObject]);
     setActiveSession(newFileObject.session);
-    console.log(files);
   }
 
   const changeActiveFile = (fileName) => {
     let session = getSessionFromFile(fileName);
-    console.log(session);
     setActiveFile(fileName);
     setActiveSession(session);
   }
 
-  const changeFileText = (fileName, newText) => {
-
+  const changeFilename = (currentFilename, newFilename) => {
+    let newFiles = files.map((file) => {
+      if(file.name === currentFilename) {
+        return {
+          name: newFilename,
+          session: file.session,
+        }
+      };
+      return file;
+    });
+    setFiles(newFiles);
   }
 
   return (
@@ -47,6 +54,7 @@ const Files = ({ children }) => {
       setFiles,
       createFile,
       changeActiveFile,
+      changeFilename,
     }}>
       {children}
     </Provider>

@@ -1,16 +1,25 @@
-.file {
-  font-size: 1.8rem;
+.item {
   padding-left: var(--offset);
+  padding-right: var(--offset);
   padding-top: 1.5rem;
   padding-bottom: 1.5rem;
-  font-weight: 400;
+
   cursor: pointer;
 }
-.file:hover {
-  background-color: rgba(255,255,255, 0.1);
+
+.file {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.8rem;
+  font-weight: 400;
 }
 
 .active {
   background-color: rgba(255,255,255, 0.1);
   color: var(--primary);
+}
+
+.edit {
+  font-size: 1.2rem;
 }
