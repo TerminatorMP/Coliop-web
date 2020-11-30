@@ -8,11 +8,16 @@ const FilesContext = React.createContext();
 const { Provider } = FilesContext;
 
 const Files = ({ children }) => {
-  const { setActiveSession } = useEditorContext();
+  const { setActiveEditorSession } = useEditorContext();
+  const [activeFile, setActiveFile] = useState('');
   const [files, setFiles] = useState([]);
-  const [activeFile, setActiveFile] = useState("");
+  const [fileCounter, setFileCounter] = useState(1);
+
+  
 
   const getSessionFromFile = (fileName) => {
+    console.log(files, fileName);
+
     for(let i = 0; i < files.length; i++ ) {
       if(files[i].name === fileName) {
         return files[i].session;
@@ -20,20 +25,27 @@ const Files = ({ children }) => {
     }
   }
 
-  const createFile = (fileName) => {
-    let newFileObject = {
-      name: `${fileName}`,
-      session: Ace.createEditSession("Neue Datei"),
-    }
-    setFiles([...files, newFileObject]);
-    setActiveSession(newFileObject.session);
+  const changeActiveFile = (fileName) => {
+    let sessionForFilename = getSessionFromFile(fileName);
+    setActiveEditorSession(sessionForFilename);
+    setActiveFile(fileName);
   }
 
-  const changeActiveFile = (fileName) => {
-    let session = getSessionFromFile(fileName);
+  const createFile = () => {
+    let fileName = 'Datei' + fileCounter + '.cmpl';
+    let fileSession = Ace.createEditSession("Neue Datei");
+    let newFileObject = {
+      name: fileName,
+      session: fileSession,
+    }
+
+    setFileCounter(fileCounter + 1);
+    setFiles([...files, newFileObject]);
+
+    setActiveEditorSession(fileSession);
     setActiveFile(fileName);
-    setActiveSession(session);
   }
+
 
   const changeFilename = (currentFilename, newFilename) => {
     let newFiles = files.map((file) => {
@@ -53,6 +65,7 @@ const Files = ({ children }) => {
       files,
       setFiles,
       createFile,
+      activeFile,
       changeActiveFile,
       changeFilename,
     }}>

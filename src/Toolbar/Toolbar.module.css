@@ -2,9 +2,30 @@
 .toolbar {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   color: var(--primary);
   background-color: var(--bg-dark-2);
   height: var(--toolbar-height);
   border-left: 1rem solid var(--bg-dark);
   padding: 0 2rem;
+}
+
+.left {
+  display: flex;
+  align-items: center;
+}
+
+.icon {
+  margin-right: 2rem;
+  width: 2rem;
+  height: 2rem;
+  cursor: pointer;
+}
+
+.icon svg {
+  fill: var(--text-light) !important;
+}
+
+.icon:hover svg {
+  fill: white !important;
 }

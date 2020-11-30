@@ -7,8 +7,7 @@ import NavigationItem from './NavigationItem/NavigationItem';
 import styles from './Navigation.module.css';
 
 export default function Navigation() {
-  const { files } = useFilesContext();
-  const [selected, setSelected] = useState("");
+  const { files, activeFile, changeActiveFile } = useFilesContext();
 
   return(
     <div className={styles.nav}>
@@ -22,8 +21,8 @@ export default function Navigation() {
             <NavigationItem 
               key={index} 
               fileName={file.name} 
-              selected={file.name === selected} 
-              setSelected={setSelected}
+              selected={file.name === activeFile} 
+              setSelected={changeActiveFile}
             />
           );
         })}

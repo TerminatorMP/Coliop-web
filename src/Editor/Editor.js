@@ -6,7 +6,7 @@ import { useEditorContext } from '../contexts/EditorContext';
 
 import styles from './Editor.module.css';
  
-import "ace-builds/src-noconflict/mode-java";
+import "../ace-modifier/cmpl-mode";
 import "ace-builds/src-noconflict/theme-monokai";
  
 function onChange(newValue) {
@@ -25,7 +25,7 @@ export default function Editor() {
     <div className={styles.editor}>
       <AceEditor
         ref={aceRef}
-        mode="java"
+        mode="cmpl"
         theme="monokai"
         onChange={onChange}
         name="UNIQUE_ID_OF_DIV"

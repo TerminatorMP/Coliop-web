@@ -5,7 +5,7 @@ import { useFilesContext } from '../../contexts/FilesContext';
 import styles from './NavigationItem.module.css';
 
 export default function NavigationItem({ fileName, selected, setSelected }) {
-  const { changeActiveFile, changeFilename } = useFilesContext();
+  const { changeFilename } = useFilesContext();
   const [editable, setEditable] = useState(false);
   const [value, setValue] = useState("");
 
@@ -14,7 +14,6 @@ export default function NavigationItem({ fileName, selected, setSelected }) {
   }, []);
 
   const handleClick = () => {
-    changeActiveFile(fileName);
     setSelected(fileName);
   }
 
@@ -29,7 +28,10 @@ export default function NavigationItem({ fileName, selected, setSelected }) {
   }
 
   return(
-    <div className={selected ? `${styles["item"]} ${styles["active"]}` : `${styles["item"]}`}>
+    <div 
+      className={selected ? `${styles["item"]} ${styles["active"]}` : `${styles["item"]}`}
+      onClick={handleClick}
+    >
       {(editable) ? 
         <form onSubmit={handleSubmit}>
           <label>
@@ -38,10 +40,7 @@ export default function NavigationItem({ fileName, selected, setSelected }) {
           <input type="submit" value="Submit" />
         </form>
         :
-        <div 
-          className={styles["file"]} 
-          onClick={handleClick}
-        >
+        <div className={styles["file"]}>
           {fileName}
           <div className={styles["edit"]} onClick={() => {setEditable(!editable)}}>
             edit

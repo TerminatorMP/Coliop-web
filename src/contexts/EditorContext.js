@@ -15,7 +15,7 @@ const EditorCon = ({ children }) => {
     editor.setShowPrintMargin(false);
   }
 
-  const setActiveSession = (sessionObject) => {
+  const setActiveEditorSession = (sessionObject) => {
     editor.setSession(sessionObject);
   }
 
@@ -29,12 +29,22 @@ const EditorCon = ({ children }) => {
     editor.setFontSize(fontSize);
   }
 
+  const undo = () => {
+    editor.undo();
+  }
+
+  const redo = () => {
+    editor.redo();
+  }
+
   return (
     <Provider value={{
       setEditorRef,
       increaseZoom,
       decreaseZoom,
-      setActiveSession,
+      undo,
+      redo,
+      setActiveEditorSession,
     }}>
       {children}
     </Provider>
