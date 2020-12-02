@@ -58,6 +58,7 @@ const Files = ({ children }) => {
       return file;
     });
     setFiles(newFiles);
+    changeActiveFile(newFilename);
   }
 
   return (

@@ -35,11 +35,17 @@ export default function Toolbar() {
   return(
     <div className={styles.toolbar}>
       <div className={styles["left"]}>
-        <div className={styles["icon"]} role="button" onClick={createFile}><Add /></div>
-        <div className={styles["icon"]} role="button" onClick={undo}><Back /></div>
-        <div className={styles["icon"]} role="button" onClick={redo}><Forth /></div>
-        <div className={styles["icon"]} role="button" onClick={increaseZoom}><ZoomIn /></div>
-        <div className={styles["icon"]} role="button" onClick={decreaseZoom}><ZoomOut /></div>
+        <div className={styles["group"]}>
+          <div className={styles["icon"]} role="button" onClick={createFile}><Add /></div>
+        </div>
+        <div className={styles["group"]}>
+          <div className={styles["icon"]} role="button" onClick={undo}><Back /></div>
+          <div className={styles["icon"]} role="button" onClick={redo}><Forth /></div>
+        </div>
+        <div className={styles["group"]}>
+          <div className={styles["icon"]} role="button" onClick={increaseZoom}><ZoomIn /></div>
+          <div className={styles["icon"]} role="button" onClick={decreaseZoom}><ZoomOut /></div>
+        </div>
       </div>
       <div className={styles["right"]}>
         <button onClick={makeRequest}>

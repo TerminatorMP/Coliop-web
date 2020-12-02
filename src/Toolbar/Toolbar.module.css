@@ -15,8 +15,13 @@
   align-items: center;
 }
 
+.group {
+  display: flex;
+  margin: 0 .5rem;
+}
+
 .icon {
-  margin-right: 2rem;
+  margin: 0 1rem;
   width: 2rem;
   height: 2rem;
   cursor: pointer;

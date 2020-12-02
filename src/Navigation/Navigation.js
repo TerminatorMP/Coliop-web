@@ -1,5 +1,4 @@
 
-import { useState } from 'react';
 import { useFilesContext } from '../contexts/FilesContext';
 
 import NavigationItem from './NavigationItem/NavigationItem';
