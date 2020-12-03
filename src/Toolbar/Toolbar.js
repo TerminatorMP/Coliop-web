@@ -2,7 +2,6 @@ import React from 'react';
 
 import { createXmlForRequest } from '../api/request-formatter';
 import { fetchJobId, fetchSolution } from '../api/api';
-
 import { useFilesContext } from '../contexts/FilesContext';
 import { useEditorContext } from '../contexts/EditorContext';
 
@@ -13,8 +12,6 @@ import { ReactComponent as ZoomIn } from '../assets/images/zoom_inc.svg';
 import { ReactComponent as ZoomOut } from '../assets/images/zoom_dec.svg'; 
 
 import styles from './Toolbar.module.css';
-
-import * as Ace from 'ace-builds';
 
 export default function Toolbar() {
   const { increaseZoom, decreaseZoom, undo, redo } = useEditorContext();

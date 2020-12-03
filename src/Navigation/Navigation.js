@@ -11,9 +11,8 @@ export default function Navigation() {
   return(
     <div className={styles.nav}>
       <div className={styles.heading}>
-        Projekt
+        Dateien
       </div>
-      <div className={styles.line} />
       <div className={styles.files}>
         {files.map((file, index) => {
           return(

@@ -1,17 +1,16 @@
 .item {
-  padding-left: var(--offset);
-  padding-right: var(--offset);
-  padding-top: 1.5rem;
-  padding-bottom: 1.5rem;
-
+  width: 100%;
+  padding: 1.5rem;
   cursor: pointer;
+  border-radius: 1rem;
 }
+
 
 .file {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 1.8rem;
+  font-size: 1.6rem;
   font-weight: 400;
 }
 

@@ -1,7 +1,9 @@
 :root {
   --primary: #0298EE;
-  --bg-dark: #1A1B1E;
+  --secondary: #00ffee;
+  --bg-dark: #111314;
   --bg-dark-2: #1F232D;
+  --border: #ffffff20;
 
   --white: #e3e3e3;
 

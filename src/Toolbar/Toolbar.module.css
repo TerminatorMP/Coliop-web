@@ -4,9 +4,9 @@
   align-items: center;
   justify-content: space-between;
   color: var(--primary);
-  background-color: var(--bg-dark-2);
+  background-color: var(--bg-dark);
   height: var(--toolbar-height);
-  border-left: 1rem solid var(--bg-dark);
+  border-bottom: solid 1px var(--border);
   padding: 0 2rem;
 }
 
@@ -32,5 +32,5 @@
 }
 
 .icon:hover svg {
-  fill: white !important;
+  fill: var(--primary) !important;
 }

@@ -4,6 +4,7 @@ import * as Ace from 'ace-builds';
 import { useEditorContext } from './EditorContext';
 
 
+
 const FilesContext = React.createContext();
 const { Provider } = FilesContext;
 
@@ -33,7 +34,7 @@ const Files = ({ children }) => {
 
   const createFile = () => {
     let fileName = 'Datei' + fileCounter + '.cmpl';
-    let fileSession = Ace.createEditSession("Neue Datei");
+    let fileSession = Ace.createEditSession("Neue Datei", 'ace/mode/cmpl');
     let newFileObject = {
       name: fileName,
       session: fileSession,

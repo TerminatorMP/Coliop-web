@@ -6,7 +6,6 @@ import { useEditorContext } from '../contexts/EditorContext';
 import styles from './Editor.module.css';
  
 import "../ace-modifier/cmpl-mode";
-import "ace-builds/src-noconflict/mode-sql";
 import "ace-builds/src-noconflict/theme-monokai";
  
 function onChange(newValue) {
