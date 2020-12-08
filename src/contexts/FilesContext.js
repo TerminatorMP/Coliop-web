@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import * as Ace from 'ace-builds';
 
 import { useEditorContext } from './EditorContext';
@@ -9,12 +9,15 @@ const FilesContext = React.createContext();
 const { Provider } = FilesContext;
 
 const Files = ({ children }) => {
-  const { setActiveEditorSession } = useEditorContext();
+  const { setActiveEditorSession, destroyEditor } = useEditorContext();
   const [activeFile, setActiveFile] = useState('');
   const [files, setFiles] = useState([]);
   const [fileCounter, setFileCounter] = useState(1);
 
-  
+  useEffect(() => {
+    const sessionForFilename = getSessionFromFile(activeFile);
+    setActiveEditorSession(sessionForFilename);
+  })
 
   const getSessionFromFile = (fileName) => {
     console.log(files, fileName);
@@ -27,8 +30,6 @@ const Files = ({ children }) => {
   }
 
   const changeActiveFile = (fileName) => {
-    let sessionForFilename = getSessionFromFile(fileName);
-    setActiveEditorSession(sessionForFilename);
     setActiveFile(fileName);
   }
 
@@ -43,7 +44,18 @@ const Files = ({ children }) => {
     setFileCounter(fileCounter + 1);
     setFiles([...files, newFileObject]);
 
-    setActiveEditorSession(fileSession);
+    setActiveFile(fileName);
+  }
+
+  const createSolutionFile = (solutionAsString) => {
+    const fileName = 'Solution';
+    const fileSession = Ace.createEditSession(solutionAsString);
+
+    let newFileObject = {
+      name: fileName,
+      session: fileSession,
+    }
+    setFiles([...files, newFileObject]);
     setActiveFile(fileName);
   }
 
@@ -70,6 +82,8 @@ const Files = ({ children }) => {
       activeFile,
       changeActiveFile,
       changeFilename,
+      getSessionFromFile,
+      createSolutionFile,
     }}>
       {children}
     </Provider>

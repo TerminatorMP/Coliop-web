@@ -1,0 +1,7 @@
+.ace-monokai {
+  background-color: var(--bg-dark);
+}
+
+.ace-monokai .ace_gutter {
+  background: var(--bg-dark);
+}

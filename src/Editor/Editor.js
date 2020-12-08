@@ -1,5 +1,6 @@
 import {useRef, useEffect} from 'react';
 import AceEditor from "react-ace";
+import * as ace from 'ace-builds';
 
 import { useEditorContext } from '../contexts/EditorContext';
 
@@ -17,8 +18,8 @@ export default function Editor() {
   const aceRef = useRef(null);
 
   useEffect(() => {
-    setEditorRef(aceRef);
-  });
+    setEditorRef(aceRef.current.editor);
+  }, []);
 
   return(
     <div className={styles.editor}>

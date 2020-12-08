@@ -1,9 +1,12 @@
 import React from 'react';
+import * as ace from 'ace-builds';
 
 import { createXmlForRequest } from '../api/request-formatter';
 import { fetchJobId, fetchSolution } from '../api/api';
 import { useFilesContext } from '../contexts/FilesContext';
 import { useEditorContext } from '../contexts/EditorContext';
+import Button from '../components/Button/Button';
+import { ServerStatuscodes as status } from '../MagicNumbers';
 
 import { ReactComponent as Add } from '../assets/images/plus.svg'; 
 import { ReactComponent as Back } from '../assets/images/arrow_back.svg';
@@ -15,18 +18,27 @@ import styles from './Toolbar.module.css';
 
 export default function Toolbar() {
   const { increaseZoom, decreaseZoom, undo, redo } = useEditorContext();
-  const { createFile, files } = useFilesContext();
-
+  const { createFile, activeFile, getSessionFromFile, createSolutionFile } = useFilesContext();
+      
+      
   const makeRequest = async () => {
-    let problemString = files[0].session.getValue();
-
-    let { jobId } = await fetchJobId('diet.cmpl');
+    const fileName = activeFile;
+    const fileSession = getSessionFromFile(fileName);
+    const problemString = fileSession.getValue();
+    
+    const { jobId } = await fetchJobId(fileName);
+    const xml = createXmlForRequest(fileName, jobId, problemString);
     console.log(jobId);
-    let xml = createXmlForRequest(jobId, problemString);
-    console.log(xml);
-    let solution = await fetchSolution(jobId, xml);
-    console.log(solution);
+    const { solution } = await fetchSolution(jobId, xml);
 
+
+    if(solution[0] === status.PROBLEM_FINISHED) {
+      console.log(solution);
+      createSolutionFile(solution[2]);
+    }
+    else {
+      console.log('Error:', solution[1]);
+    }
   }
 
   return(
@@ -45,9 +57,9 @@ export default function Toolbar() {
         </div>
       </div>
       <div className={styles["right"]}>
-        <button onClick={makeRequest}>
-          Senden
-        </button>
+        <Button onClick={makeRequest}>
+          Lösen >
+        </Button>
       </div>
 
     </div>

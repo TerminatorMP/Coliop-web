@@ -1,0 +1,9 @@
+.button {
+  font-size: 1.6rem;
+  padding: 1rem 1.5rem;
+  border: solid 1px var(--primary);
+  color: var(--primary);
+  border-radius: .4rem;
+  font-weight: 300;
+  cursor: pointer;
+}

@@ -1,8 +1,8 @@
 import convert from 'xml-js';
 
 
-const createXmlForRequest = (jobId, problemString) => {
-  let json = {
+const createXmlForRequest = (fileName, jobId, problemString) => {
+  const json = {
     _declaration: {
       _attributes: {
         version: '1.0',
@@ -14,14 +14,14 @@ const createXmlForRequest = (jobId, problemString) => {
         version: '1.0',
       },
       general: {
-        name: 'diet.cmpl',
+        name: fileName,
         jobId: jobId,
       },
       problemFiles: {
         file: [
           {
             _attributes: {
-              name: 'diet.cmpl',
+              name: fileName,
               type: 'cmplMain',
             },
             _text: problemString,
@@ -30,8 +30,9 @@ const createXmlForRequest = (jobId, problemString) => {
       }
     }
   }
-  var options = {compact: true, ignoreComment: true, spaces: 4};
-  let finalXML = convert.json2xml(json, options);
+  const options = {compact: true, ignoreComment: true, spaces: 4};
+  const finalXML = convert.json2xml(json, options);
+
   return finalXML;
 }
 

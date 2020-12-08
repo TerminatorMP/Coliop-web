@@ -6,7 +6,7 @@
   color: var(--primary);
   background-color: var(--bg-dark);
   height: var(--toolbar-height);
-  border-bottom: solid 1px var(--border);
+  border-bottom: solid var(--border-weight) var(--border);
   padding: 0 2rem;
 }
 
@@ -22,8 +22,8 @@
 
 .icon {
   margin: 0 1rem;
-  width: 2rem;
-  height: 2rem;
+  width: 2.2rem;
+  height: 2.2rem;
   cursor: pointer;
 }
 

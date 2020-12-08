@@ -4,7 +4,7 @@
   height: var(--header-height);
   background-color: var(--bg-dark);
   padding: 0 2rem;
-  border-bottom: solid 1px var(--border);
+  border-bottom: solid var(--border-weight) var(--border);
 }
 
 .logo {

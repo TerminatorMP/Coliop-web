@@ -1,31 +1,31 @@
-import React, { useState, createRef, useContext } from 'react';
-
-import * as Ace from 'ace-builds';
+import React, { useContext, useState, useEffect } from 'react';
 
 const EditorContext = React.createContext();
 const { Provider } = EditorContext;
 
 const EditorCon = ({ children }) => {
-  let editor;
+  const [editor, setEditor] = useState(undefined);
   let fontSize = 18;
 
   const setEditorRef = (ref) => {
-    editor = ref.current.editor;
-    editor.setFontSize(fontSize);
-    editor.setShowPrintMargin(false);
+    setEditor(ref);
+    ref.setFontSize(fontSize);
+    ref.setShowPrintMargin(false);
   }
 
   const setActiveEditorSession = (sessionObject) => {
-    editor.setSession(sessionObject);
+    if(editor) {
+      editor.setSession(sessionObject);
+    }
   }
 
   const increaseZoom = () => {
-    fontSize += 2;
+    fontSize += 3;
     editor.setFontSize(fontSize);
   }
 
   const decreaseZoom = () => {
-    fontSize -= 2;
+    fontSize -= 3;
     editor.setFontSize(fontSize);
   }
 

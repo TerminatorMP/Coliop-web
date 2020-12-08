@@ -3,7 +3,8 @@
   --secondary: #00ffee;
   --bg-dark: #111314;
   --bg-dark-2: #1F232D;
-  --border: #ffffff20;
+  --border: #ffffff30;
+  --border-weight: 1px;
 
   --white: #e3e3e3;
 
@@ -25,25 +26,7 @@ html {
   background-color: var(--bg-dark);
 }
 
-.app {
-  
-}
-
 .main {
   display: flex;
   width: 100%;
-}
-
-.content {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-}
-
-.ace-monokai {
-  background-color: var(--bg-dark);
-}
-
-.ace-monokai .ace_gutter {
-  background: transparent;
 }

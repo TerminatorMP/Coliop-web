@@ -6,7 +6,7 @@
   width: 30rem;
   padding: var(--offset);
   padding-top: 3rem;
-  border-right: solid 1px var(--border);
+  border-right: solid var(--border-weight) var(--border);
 }
 
 .heading {
@@ -21,6 +21,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 1.5rem;
+  margin-top: 2rem;
 }
 

@@ -1,26 +1,29 @@
-import Editor from './Editor/Editor';
+import React from 'react';
+
 import Header from './Header/Header';
 import Navigation from './Navigation/Navigation';
 import Footer from './Footer/Footer';
-import Toolbar from './Toolbar/Toolbar';
+import Content from './Content/Content';
 
 import { Files } from './contexts/FilesContext';
 import { EditorCon } from './contexts/EditorContext';
 
-function App() {
 
+const Main = () => (
+  <div className="main">
+    <Navigation />
+    <Content />
+  </div>
+);
+
+
+function App() {
   return (
     <div className="app">
       <Header />
         <EditorCon>
           <Files>
-              <div className="main">
-                <Navigation />
-                <div className="content">
-                  <Toolbar />
-                  <Editor />
-                </div>
-              </div>
+            <Main />
           </Files>
         </EditorCon>
       <Footer />

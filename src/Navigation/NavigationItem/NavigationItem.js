@@ -41,7 +41,9 @@ export default function NavigationItem({ fileName, selected, setSelected }) {
         </form>
         :
         <div className={styles["file"]}>
-          {fileName}
+          <div className={styles["name"]}>
+            {fileName}
+          </div>
           <div className={styles["edit"]} onClick={() => {setEditable(!editable)}}>
             edit
           </div>
