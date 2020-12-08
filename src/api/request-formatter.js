@@ -1,6 +1,5 @@
 import convert from 'xml-js';
 
-
 const createXmlForRequest = (fileName, jobId, problemString) => {
   const json = {
     _declaration: {
@@ -36,4 +35,9 @@ const createXmlForRequest = (fileName, jobId, problemString) => {
   return finalXML;
 }
 
-export { createXmlForRequest };
+const convertXmlToJson = (xml) => {
+  const options = {compact: true, ignoreComment: true, spaces: 4};
+  return convert.xml2json(xml, options);
+}
+
+export { createXmlForRequest, convertXmlToJson };

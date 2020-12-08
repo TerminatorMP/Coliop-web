@@ -1,7 +1,7 @@
 import React from 'react';
 import * as ace from 'ace-builds';
 
-import { createXmlForRequest } from '../api/request-formatter';
+import { createXmlForRequest, convertXmlToJson } from '../api/request-formatter';
 import { fetchJobId, fetchSolution } from '../api/api';
 import { useFilesContext } from '../contexts/FilesContext';
 import { useEditorContext } from '../contexts/EditorContext';
@@ -34,6 +34,7 @@ export default function Toolbar() {
 
     if(solution[0] === status.PROBLEM_FINISHED) {
       console.log(solution);
+      const solutionJson = convertXmlToJson(solution[2])
       createSolutionFile(solution[2]);
     }
     else {
