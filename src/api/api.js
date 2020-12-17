@@ -19,16 +19,54 @@ export const fetchJobId = async (fileName) => {
   return result.json();
 }
 
-export const fetchSolution = async (jobId, problemXml) => {
+export const fetchMessages = async (jobId) => {
+  let url = new URL(CMPL_SERVER_URL + '/getMessages');
+  const params = {jobId: jobId}
+  url.search = new URLSearchParams(params).toString();
+
+  const result = await fetch(url, {
+    method: 'GET',
+    headers: header,
+  });
+
+  return result.json();
+}
+
+export const fetchSolutionStatus = async (jobId) => {
+  let url = new URL(CMPL_SERVER_URL + '/checkForSolution');
+  const params = {jobId: jobId}
+  url.search = new URLSearchParams(params).toString();
+
+  const result = await fetch(url, {
+    method: 'GET',
+    headers: header,
+  });
+  
+  return result.json();
+}
+
+export const sendCmplProblem = async (problemXml) => {
   const data = {
-    jobId: jobId,
-    xml: `${problemXml}`,
+    xml: problemXml,
   };
 
-  const result = await fetch(CMPL_SERVER_URL + '/solve', {
+  const result = await fetch(CMPL_SERVER_URL + '/sendXML', {
     method: 'POST',
     headers: header,
     body: JSON.stringify(data)})
+
+  return result.status;
+}
+
+export const fetchSolution = async (jobId) => {
+  let url = new URL(CMPL_SERVER_URL + '/getSolution');
+  const params = {jobId: jobId}
+  url.search = new URLSearchParams(params).toString();
+
+  const result = await fetch(url, {
+    method: 'GET',
+    headers: header,
+  });
 
   return result.json();
 }

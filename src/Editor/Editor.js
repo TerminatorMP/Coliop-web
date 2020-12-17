@@ -13,7 +13,7 @@ function onChange(newValue) {
   console.log("change", newValue);
 }
 
-export default function Editor() {
+export default function Editor({ displayed }) {
   const { setEditorRef } = useEditorContext();
   const aceRef = useRef(null);
 
@@ -22,7 +22,10 @@ export default function Editor() {
   }, []);
 
   return(
-    <div className={styles.editor}>
+    <div 
+      style={displayed ? {display: 'block'} : {display: 'none'}} 
+      className={styles.editor}
+    >
       <AceEditor
         ref={aceRef}
         mode="cmpl"

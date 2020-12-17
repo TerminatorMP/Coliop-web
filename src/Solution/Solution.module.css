@@ -1,0 +1,13 @@
+.solution {
+  height: calc(100vh - (var(--header-height) + var(--toolbar-height)));
+  padding-top: 3rem;
+  padding-left: 3rem;
+  font-size: 1.8rem;
+  font-weight: 300;
+  max-width: 80rem; 
+  color: var(--text-green);
+}
+
+.description {
+  color: var(--text-light);
+}

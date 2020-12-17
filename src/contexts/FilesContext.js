@@ -3,43 +3,57 @@ import * as Ace from 'ace-builds';
 
 import { useEditorContext } from './EditorContext';
 
-
-
 const FilesContext = React.createContext();
 const { Provider } = FilesContext;
 
 const Files = ({ children }) => {
-  const { setActiveEditorSession, destroyEditor } = useEditorContext();
+  const { setActiveEditorSession } = useEditorContext();
   const [activeFile, setActiveFile] = useState('');
   const [files, setFiles] = useState([]);
   const [fileCounter, setFileCounter] = useState(1);
 
   useEffect(() => {
-    const sessionForFilename = getSessionFromFile(activeFile);
-    setActiveEditorSession(sessionForFilename);
-  })
+    if(activeFile !== 'Solution' && activeFile !== 'Ausgabe') {
+      const sessionForFilename = getContentFromFile(activeFile);
+      setActiveEditorSession(sessionForFilename);
+      console.log('cmpl Session set')
+    }
+  }, [activeFile])
 
-  const getSessionFromFile = (fileName) => {
-    console.log(files, fileName);
-
-    for(let i = 0; i < files.length; i++ ) {
-      if(files[i].name === fileName) {
-        return files[i].session;
-      }
+  const createFileObject = (name, content, type) => {
+    return {
+      name: name,
+      content: content,
+      type: type,
     }
   }
 
+  const getIndexForFilename = (fileName) => {
+    for(let i = 0; i < files.length; i++ ) {
+      if(fileName === files[i].name) {
+        return i;
+      }
+    }
+    return undefined;
+  }
+  
+  const getContentFromFile = (fileName) => {
+    const fileIndex = getIndexForFilename(fileName);
+    if(fileIndex !== undefined) {
+      return files[fileIndex].content;
+    }
+    return undefined;
+  }
+  
   const changeActiveFile = (fileName) => {
     setActiveFile(fileName);
   }
 
   const createFile = () => {
-    let fileName = 'Datei' + fileCounter + '.cmpl';
-    let fileSession = Ace.createEditSession("Neue Datei", 'ace/mode/cmpl');
-    let newFileObject = {
-      name: fileName,
-      session: fileSession,
-    }
+    const fileName = 'Datei' + fileCounter + '.cmpl';
+    const fileContent = Ace.createEditSession("Neue Datei", 'ace/mode/cmpl');
+    const fileType = 'editorFile'
+    const newFileObject = createFileObject(fileName, fileContent, fileType);
 
     setFileCounter(fileCounter + 1);
     setFiles([...files, newFileObject]);
@@ -47,31 +61,39 @@ const Files = ({ children }) => {
     setActiveFile(fileName);
   }
 
-  const createSolutionFile = (solutionAsString) => {
-    const fileName = 'Solution';
-    const fileSession = Ace.createEditSession(solutionAsString);
+  const createSolutionFile = (solutionContent) => {
+    const newFileObject = createFileObject('Solution', solutionContent, 'solutionFile');
 
-    let newFileObject = {
-      name: fileName,
-      session: fileSession,
-    }
     setFiles([...files, newFileObject]);
-    setActiveFile(fileName);
+    setActiveFile('Solution');
   }
 
+  const createOrUpdateAusgabeFile = (ausgabeContent) => {
+    const newFileObject = createFileObject('Ausgabe', ausgabeContent, 'ausgabeFile');
+
+    setFiles([...files, newFileObject]);
+    setActiveFile('Ausgabe');
+  }
 
   const changeFilename = (currentFilename, newFilename) => {
     let newFiles = files.map((file) => {
       if(file.name === currentFilename) {
-        return {
-          name: newFilename,
-          session: file.session,
-        }
+        return createFileObject(newFilename, file.content, file.type);
       };
       return file;
     });
     setFiles(newFiles);
     changeActiveFile(newFilename);
+  }
+
+  const changeFilecontent = (fileName, newFileContent) => {
+    let newFiles = files.map((file) => {
+      if(file.name === fileName) {
+        return createFileObject(fileName, newFileContent, file.type);
+      };
+      return file;
+    });
+    setFiles(newFiles);
   }
 
   return (
@@ -82,8 +104,9 @@ const Files = ({ children }) => {
       activeFile,
       changeActiveFile,
       changeFilename,
-      getSessionFromFile,
+      getContentFromFile,
       createSolutionFile,
+      createOrUpdateAusgabeFile,
     }}>
       {children}
     </Provider>
