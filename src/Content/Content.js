@@ -20,7 +20,7 @@ export default function Content() {
         )
       case 'Ausgabe':
         return(
-          <div>Ausgabe: {getContentFromFile(activeFile)}</div>
+          <div style={{color: 'red'}}>Ausgabe: {getContentFromFile(activeFile)}</div>
         )
       default:
         return(
@@ -32,12 +32,7 @@ export default function Content() {
   return(
     <div className={styles["content"]}>
       {displayComponetsBasedOnActiveFile()}
-      {/* {activeFile === 'Solution' ?
-        <Solution solutionXmlString={getContentFromFile(activeFile)} />
-        :
-        <Toolbar />
-      } */}
-      <Editor displayed={activeFile !== 'Solution'} />
+      <Editor displayed={activeFile !== 'Solution' && activeFile !== 'Ausgabe'} />
     </div>
   )
 }

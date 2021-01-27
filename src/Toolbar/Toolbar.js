@@ -17,8 +17,8 @@ import styles from './Toolbar.module.css';
 
 export default function Toolbar() {
   const { increaseZoom, decreaseZoom, undo, redo } = useEditorContext();
-  const { createFile, activeFile, getContentFromFile, createSolutionFile } = useFilesContext();
-      
+  const { createFile, activeFile, getContentFromFile, createSolutionFile, createOrUpdateAusgabeFile } = useFilesContext();
+
       
   const makeRequest = async () => {
     const fileName = activeFile;
@@ -36,7 +36,7 @@ export default function Toolbar() {
       let { solutionStatus } = await fetchSolutionStatus(jobId);
 
       let { message } = await fetchMessages(jobId);
-      console.log("message", message);
+      createOrUpdateAusgabeFile(message[2]);
 
       if(solutionStatus[0] === 12) {
           clearInterval(checker);

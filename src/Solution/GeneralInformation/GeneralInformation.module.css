@@ -1,0 +1,21 @@
+.description {
+  color: var(--text-light);
+}
+
+.generalTable {
+  border-collapse: collapse;
+  color: var(--text-light);
+  text-align: left;
+  margin-top: 2rem;
+  margin-left: 2rem;
+}
+
+.generalTable th {
+  padding: .5rem;
+  font-weight: 400;
+}
+
+.value {
+  color: var(--text-green);
+  padding-left: 2rem; 
+}
