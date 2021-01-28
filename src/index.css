@@ -1,15 +1,15 @@
 :root {
   --primary: #0298EE;
   --secondary: #00ffee;
-  --bg-dark: #1b1e20;
+  --bg-dark: #030303;
   --bg-dark-2: #1F232D;
   --border: #ffffff30;
   --border-weight: 1px;
 
   --white: #e3e3e3;
 
-  --text-light: #B9CADA;
-  --text-green: #00F99F;
+  --text-light: #c5c5c5;
+  --text-green: #00ff0da9;
 
   --header-height: 7rem;
   --toolbar-height: 6rem;

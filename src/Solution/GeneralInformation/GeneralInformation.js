@@ -51,7 +51,7 @@ export default function GeneralInformation({generalInformationsObj}) {
 
   return(
     <>
-      <div>Solution fuer {instanceName}</div>
+      <h2>{instanceName}</h2>
         <table className={styles["generalTable"]}>
           {generalInformationDataObj.map(({desc, val}) =>
             <GeneralColumn 

@@ -7,3 +7,31 @@
   max-width: 80rem; 
   color: var(--text-green);
 }
+
+.table-values {
+  border-collapse: collapse;
+  color: var(--text-light);
+  margin-top: 5rem;
+}
+
+.table-values td {
+  text-align: center;
+  padding: .5rem;
+}
+
+.activity {
+  color: var(--text-green);
+  font-weight: 600;
+}
+
+.table-values th {
+  padding: 1rem;
+  text-align: left;
+  font-weight: 600;
+  color: var(--text-light);
+  background-color: var(--bg-dark);
+}
+
+.table-values tr:nth-child(odd) {
+  background-color: #ffffff20;
+}
