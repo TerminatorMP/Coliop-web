@@ -4,19 +4,24 @@ const EditorContext = React.createContext();
 const { Provider } = EditorContext;
 
 const EditorCon = ({ children }) => {
-  const [editor, setEditor] = useState(undefined);
+  let editor = "undefined start";
   let fontSize = 18;
 
   const setEditorRef = (ref) => {
-    setEditor(ref);
+    editor = ref;
     ref.setFontSize(fontSize);
     ref.setShowPrintMargin(false);
+    console.log(editor);
   }
 
   const setActiveEditorSession = (sessionObject) => {
     if(editor) {
       editor.setSession(sessionObject);
     }
+  }
+
+  const updateSize = () => {
+    editor.resize();
   }
 
   const increaseZoom = () => {
@@ -44,6 +49,7 @@ const EditorCon = ({ children }) => {
       decreaseZoom,
       undo,
       redo,
+      updateSize,
       setActiveEditorSession,
     }}>
       {children}

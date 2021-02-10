@@ -60,6 +60,7 @@ export default function Solution({ solutionXmlString }) {
           </tr>
         )}
       </table>
+      <div className={styles["scroll-spacer"]}/>
     </div>
   )
 }

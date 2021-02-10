@@ -1,0 +1,23 @@
+.resizer {
+  background-color: var(--bg-dark-2);
+  color: var(--text-light);
+  overflow: hidden;
+}
+
+.dragger {
+  display: flex;
+  align-items: center;
+  cursor: grab;
+  width: 100%;
+  background-color: #ffffff05;
+  border-top: solid 1px var(--border);
+  border-bottom: solid 1px var(--border);
+  color: var(--text-light);
+  font-size: 1.4rem;
+  padding: .5rem 2rem;
+  user-select: none;
+}
+
+.content {
+  padding: 2rem;
+}

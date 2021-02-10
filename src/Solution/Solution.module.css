@@ -21,7 +21,6 @@
 
 .activity {
   color: var(--text-green);
-  font-weight: 600;
 }
 
 .table-values th {
@@ -34,4 +33,9 @@
 
 .table-values tr:nth-child(odd) {
   background-color: #ffffff20;
+}
+
+.scroll-spacer {
+  height: 3rem;
+  width: 100%;
 }
