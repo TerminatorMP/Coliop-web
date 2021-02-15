@@ -15,9 +15,9 @@ import { ReactComponent as ZoomOut } from '../assets/images/zoom_dec.svg';
 
 import styles from './Toolbar.module.css';
 
-export default function Toolbar() {
+export default function Toolbar({ setMessageObjFromXmlString }) {
   const { increaseZoom, decreaseZoom, undo, redo } = useEditorContext();
-  const { createFile, activeFile, getContentFromFile, createSolutionFile, createOrUpdateAusgabeFile } = useFilesContext();
+  const { createFile, activeFile, getContentFromFile, createSolutionFile } = useFilesContext();
 
       
   const makeRequest = async () => {
@@ -36,7 +36,7 @@ export default function Toolbar() {
       let { solutionStatus } = await fetchSolutionStatus(jobId);
 
       let { message } = await fetchMessages(jobId);
-      createOrUpdateAusgabeFile(message[2]);
+      setMessageObjFromXmlString(message[2]);
 
       if(solutionStatus[0] === 12) {
           clearInterval(checker);

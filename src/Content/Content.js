@@ -4,7 +4,7 @@ import Editor from '../Editor/Editor';
 import Toolbar from '../Toolbar/Toolbar';
 import Solution from '../Solution/Solution';
 import Messages from '../Messages/Messages';
-
+import { convertXmlToJson } from '../api/request-formatter';
 import { useFilesContext } from '../contexts/FilesContext';
 
 import styles from './Content.module.css';
@@ -12,8 +12,14 @@ import styles from './Content.module.css';
 
 export default function Content() {
   const { activeFile, getContentFromFile } = useFilesContext();
-
   const contentRef = React.useRef(null);
+  const [messagesObj, setMessageObj] = React.useState('');
+
+  const setMessageObjFromXmlString = (xml) => {
+    const json = convertXmlToJson(xml);
+    const obj = JSON.parse(json);
+    setMessageObj(obj);
+  } 
   
   const displayComponetsBasedOnActiveFile = () => {
     switch(activeFile) {
@@ -27,7 +33,7 @@ export default function Content() {
         )
       default:
         return(
-          <Toolbar />
+          <Toolbar setMessageObjFromXmlString={setMessageObjFromXmlString}/>
         )
     }
   }
@@ -35,10 +41,12 @@ export default function Content() {
   return(
     <div ref={contentRef} className={styles["content"]}>
       {displayComponetsBasedOnActiveFile()}
-      <Editor displayed={activeFile !== 'Solution' && activeFile !== 'Ausgabe'} />
+      <Editor displayed={activeFile !== 'Solution'} />
       <div className={styles["spacer"]}/>
 
-      {activeFile !== 'Solution' && activeFile !== 'Ausgabe' && <Messages parentRef={contentRef}/> }
+      {activeFile !== 'Solution' && 
+        <Messages parentRef={contentRef} messageObj={messagesObj} />
+      }
     </div>
   )
 }

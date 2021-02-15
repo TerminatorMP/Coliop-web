@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
 import { convertXmlToJson } from '../api/request-formatter';
 import GeneralInformation from './GeneralInformation/GeneralInformation';
@@ -9,7 +9,6 @@ import styles from './Solution.module.css';
 export default function Solution({ solutionXmlString }) {
   const solutionJson = convertXmlToJson(solutionXmlString);
   const data = JSON.parse(solutionJson);
-  console.log("data", data);
 
   const variableDataArray = data.CmplSolutions.solution.variables.variable;
   const constraintsDataArray = data.CmplSolutions.solution.linearConstraints.constraint;

@@ -1,12 +1,10 @@
 import React from "react";
-
 import { useEditorContext } from '../contexts/EditorContext';
 
 import styles from "./Messages.module.css";
 
-export default function Messages({ parentRef }) {
+export default function Messages({ parentRef, messageObj = undefined }) {
   const { updateSize } = useEditorContext();
-
   const [height, setHeight] = React.useState(200);
   const draggerRef = React.useRef(null);
 
@@ -16,7 +14,7 @@ export default function Messages({ parentRef }) {
     height: height + "px"
   };
 
-  const handleDrag = (event) => {
+  const calculateHeight = (event) => {
     const boundryBottom = parentRef.current.getBoundingClientRect().bottom;
     const loc = event.clientY;
     const calculatedHeight = boundryBottom - loc;
@@ -24,20 +22,18 @@ export default function Messages({ parentRef }) {
     updateSize();
   };
 
-  const handleMouseDown = (event) => {
-    console.log("down");
-    document.addEventListener("mousemove", handleDrag);
+  const handleDragLogic = (event) => {
+    document.addEventListener("mousemove", calculateHeight);
     document.addEventListener("mouseup", () => {
-      document.removeEventListener("mousemove", handleDrag);
-      console.log("up");
+      document.removeEventListener("mousemove", calculateHeight);
     }, { once: true });
   }
 
   React.useEffect(() => {
     const draggerElement = draggerRef.current;
-    draggerElement.addEventListener("mousedown", handleMouseDown);
+    draggerElement.addEventListener("mousedown", handleDragLogic);
 
-    return () => draggerElement.removeEventListener("mousedown", handleMouseDown);
+    return () => draggerElement.removeEventListener("mousedown", handleDragLogic);
   });
 
   return (
@@ -46,11 +42,7 @@ export default function Messages({ parentRef }) {
         Konsole
       </div>
       <div className={styles["content"]}>
-        Resizer
-        <p>Mehr Inhalt</p>
-        <p>Mehr Inhalt</p>
-        <p>Mehr Inhalt</p>
-        <p>Mehr Inhalt</p>
+       { messageObj ? messageObj.CmplMessages.general.message._text : 'keine Messages'}
       </div>
     </div>
   );

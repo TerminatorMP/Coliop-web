@@ -76,16 +76,6 @@ const Files = ({ children }) => {
     setActiveFile('Solution');
   }
 
-
-  const createOrUpdateAusgabeFile = (ausgabeContent) => {
-    const newFileObject = createFileObject('Ausgabe', ausgabeContent, 'ausgabeFile');
-
-    
-    addFile(newFileObject);
-    setActiveFile('Ausgabe');
-    console.log('Ausgabe erstellt');
-  }
-
   const changeFilename = (currentFilename, newFilename) => {
     let newFiles = files.map((file) => {
       if(file.name === currentFilename) {
@@ -117,7 +107,6 @@ const Files = ({ children }) => {
       changeFilename,
       getContentFromFile,
       createSolutionFile,
-      createOrUpdateAusgabeFile,
     }}>
       {children}
     </Provider>
