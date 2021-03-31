@@ -10,7 +10,7 @@ export default function Solution({ solutionXmlString }) {
   const solutionJson = convertXmlToJson(solutionXmlString);
   const data = JSON.parse(solutionJson);
 
-  const variableDataArray = data.CmplSolutions.solution.variables.variable;
+  const variableDataArray = data?.CmplSolutions.solution.variables.variable;
   const constraintsDataArray = data.CmplSolutions.solution.linearConstraints.constraint;
   
   

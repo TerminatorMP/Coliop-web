@@ -1,15 +1,23 @@
 :root {
   --primary: #0298EE;
   --secondary: #00ffee;
+  --signal: #d0ff006c;
   --bg-dark: #030303;
-  --bg-dark-2: #1b1b1b;
-  --border: #ffffff30;
+  --bg-dark-2: #252525;
+  --border: #9b9b9b63;
   --border-weight: 1px;
 
   --white: #e3e3e3;
 
-  --text-light: #c5c5c5;
+  --text-light: #c0c0c0;
+  --text-darken: #b3b3b3;
   --text-green: #00ff0da9;
+
+  --message-text: #fffb003f;
+  --message-error: #ff6161;
+  --message-error-transparent: #c0272730;
+
+  --message-box-offeset: 2rem;
 
   --header-height: 7rem;
   --toolbar-height: 6rem;

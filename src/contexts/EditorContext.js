@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext } from 'react';
 
 const EditorContext = React.createContext();
 const { Provider } = EditorContext;
@@ -11,7 +11,6 @@ const EditorCon = ({ children }) => {
     editor = ref;
     ref.setFontSize(fontSize);
     ref.setShowPrintMargin(false);
-    console.log(editor);
   }
 
   const setActiveEditorSession = (sessionObject) => {

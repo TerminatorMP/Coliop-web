@@ -1,6 +1,9 @@
+
 .resizer {
-  background-color: var(--bg-dark-2);
-  color: var(--text-light);
+  display: flex;
+  flex-direction: column;
+  background-color: var(--bg-dark);
+  color: var(--text-darken);
   overflow: hidden;
 }
 
@@ -9,15 +12,46 @@
   align-items: center;
   cursor: grab;
   width: 100%;
-  background-color: #ffffff05;
-  border-top: solid 1px var(--border);
-  border-bottom: solid 1px var(--border);
+  background-color: var(--bg-dark-2);
+  border-bottom: solid 3px var(--border);
   color: var(--text-light);
   font-size: 1.4rem;
+  font-weight: bold;
   padding: .5rem 2rem;
   user-select: none;
 }
 
 .content {
-  padding: 2rem;
+  --message-padding: 1rem;
+  --border-weight: 1px;
+  font-size: 1.4rem;
+  flex-grow: 1;
+  padding: 1rem 0;
+  white-space:pre-wrap;
+  overflow: scroll;
+}
+
+.text-message {
+  margin-top: calc(var(--border-weight) *-1);
+  padding-top: var(--message-padding);
+  padding-bottom: var(--message-padding);
+  padding-left: var(--message-padding);
+  border-bottom: solid var(--border-weight) var(--text-darken);
+}
+
+.error-message {
+  margin-top: calc(var(--border-weight) *-1);
+  padding-top: var(--message-padding);
+  padding-bottom: var(--message-padding);
+  padding-left: var(--message-padding);
+  border-top: solid var(--border-weight) var(--message-error);
+  border-bottom: solid var(--border-weight) var(--message-error);
+  color: var(--message-error);
+  background-color: var(--message-error-transparent);
+  z-index: 2;
+}
+
+.error-message p {
+  margin-bottom: 1rem;
+  font-weight: 600;
 }

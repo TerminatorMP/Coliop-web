@@ -1,15 +1,19 @@
 import React from "react";
 import { useEditorContext } from '../contexts/EditorContext';
+import { useMessageContext } from '../contexts/MessageContext';
 
 import styles from "./Messages.module.css";
 
-export default function Messages({ parentRef, messageObj = undefined }) {
+const initialConsoleHeightInPx = 200;
+
+export default function Messages({ parentRef }) {
   const { updateSize } = useEditorContext();
-  const [height, setHeight] = React.useState(200);
+  const [height, setHeight] = React.useState(initialConsoleHeightInPx);
   const draggerRef = React.useRef(null);
 
-  const draggerHeight = 30;
+  const { messages } = useMessageContext();
 
+  const draggerHeight = 28;
   const style = {
     height: height + "px"
   };
@@ -36,13 +40,39 @@ export default function Messages({ parentRef, messageObj = undefined }) {
     return () => draggerElement.removeEventListener("mousedown", handleDragLogic);
   });
 
+  const TextMessage = ({ messageObj }) => {
+    return(
+      <div className={styles["text-message"]}>
+        {messageObj.content}
+      </div>
+    )
+  }
+
+  const ErrorMessage = ({ messageObj }) => {
+    const { description, location } = messageObj.content;
+    return(
+      <div className={styles["error-message"]}>
+        <p>Error: {description}</p>
+        {location}
+      </div>
+    )
+  }
+
   return (
     <div style={style} className={styles["resizer"]}>
       <div ref={draggerRef} className={styles["dragger"]}>
         Konsole
       </div>
       <div className={styles["content"]}>
-       { messageObj ? messageObj.CmplMessages.general.message._text : 'keine Messages'}
+        {messages.map((messageObj) => {
+          if(messageObj.type === 'text') {
+            return <TextMessage {...{ messageObj }} />
+          }
+          if(messageObj.type === 'error') {
+            return <ErrorMessage {...{ messageObj }} />
+          }
+          return 'undefined Messagetype'
+        })}
       </div>
     </div>
   );

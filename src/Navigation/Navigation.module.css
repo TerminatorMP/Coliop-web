@@ -4,7 +4,6 @@
   color: var(--text-light);
   background-color: var(--bg-dark);
   width: 30rem;
-  padding: var(--offset);
   padding-top: 3rem;
   border-right: solid var(--border-weight) var(--border);
 }

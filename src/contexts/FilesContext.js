@@ -24,6 +24,10 @@ const Files = ({ children }) => {
     console.log('files updated',files);
   }, [files])
 
+  useEffect(() => {
+    createFile();
+  }, [])
+
   const addFile = (newFile) => {
     setFiles((prevState) => [...prevState, newFile]);
   }
@@ -69,9 +73,14 @@ const Files = ({ children }) => {
     setActiveFile(fileName);
   }
 
-  const createSolutionFile = (solutionContent) => {
-    const newFileObject = createFileObject('Solution', solutionContent, 'solutionFile');
+  const createOrUpdateSolutionFile = (solutionContent) => {
+    if(getIndexForFilename('Solution')) {
+      changeFilecontent('Solution', solutionContent);
+      setActiveFile('Solution');
+      return;
+    }
 
+    const newFileObject = createFileObject('Solution', solutionContent, 'solutionFile');
     addFile(newFileObject);
     setActiveFile('Solution');
   }
@@ -106,7 +115,7 @@ const Files = ({ children }) => {
       changeActiveFile,
       changeFilename,
       getContentFromFile,
-      createSolutionFile,
+      createOrUpdateSolutionFile,
     }}>
       {children}
     </Provider>
