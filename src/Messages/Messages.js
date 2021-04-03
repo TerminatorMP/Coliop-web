@@ -11,7 +11,7 @@ export default function Messages({ parentRef }) {
   const [height, setHeight] = React.useState(initialConsoleHeightInPx);
   const draggerRef = React.useRef(null);
 
-  const { messages } = useMessageContext();
+  const { messages, clearMessages } = useMessageContext();
 
   const draggerHeight = 28;
   const style = {
@@ -49,6 +49,7 @@ export default function Messages({ parentRef }) {
   }
 
   const ErrorMessage = ({ messageObj }) => {
+    console.log('Error:' ,messageObj);
     const { description, location } = messageObj.content;
     return(
       <div className={styles["error-message"]}>
@@ -61,7 +62,12 @@ export default function Messages({ parentRef }) {
   return (
     <div style={style} className={styles["resizer"]}>
       <div ref={draggerRef} className={styles["dragger"]}>
-        Konsole
+        <div>
+          Konsole
+        </div>
+        <div onClick={() => clearMessages()}>
+          Clear
+        </div>
       </div>
       <div className={styles["content"]}>
         {messages.map((messageObj) => {

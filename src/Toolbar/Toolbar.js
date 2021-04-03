@@ -21,18 +21,26 @@ export default function Toolbar({ setMessageObjFromXmlString }) {
   const { createFile, activeFile, getContentFromFile, createOrUpdateSolutionFile } = useFilesContext();
   const { addTextMessage, addErrorMessage } = useMessageContext();
 
+  const convertToArray = (object) => {
+    if(Array.isArray(object)) {
+      return object;
+    }
+    return [object];
+  }
+
   const handleErrorMessages = (messageResponse) => {
     const messageDataObj = JSON.parse(convertXmlToJson(messageResponse[2]));
     const generalData = messageDataObj.CmplMessages.general;
-    const messagesData = messageDataObj.CmplMessages.messages;
     if(generalData.generalStatus._text === "error") {
-      const errorDataObj = {
-        description: messagesData.message._attributes.description,
-        location: messagesData.message._attributes.location
-      }
-      addErrorMessage(errorDataObj);
+      const messagesData = convertToArray(messageDataObj.CmplMessages.messages.message);
+      messagesData.forEach((message) => {
+        const errorDataObj = {
+          description: message._attributes.description,
+          location: message._attributes.location
+        }
+        addErrorMessage(errorDataObj);
+      })
     }
-    console.log(messageDataObj);
   }
 
       

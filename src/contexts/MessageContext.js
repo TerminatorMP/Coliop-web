@@ -43,7 +43,7 @@ const MessageProvider = ({ children }) => {
   }
 
   const clearMessages = () => {
-    setMessages('');
+    setMessages([createTextObj('Konsole geleert')]);
   }
 
   return(

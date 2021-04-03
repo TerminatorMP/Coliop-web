@@ -10,12 +10,12 @@
   --white: #e3e3e3;
 
   --text-light: #c0c0c0;
-  --text-darken: #b3b3b3;
+  --text-darken: #a8a8a8;
   --text-green: #00ff0da9;
 
-  --message-text: #fffb003f;
-  --message-error: #ff6161;
-  --message-error-transparent: #c0272730;
+  
+  --message-error: #df4141;
+  --message-error-transparent: #68171744;
 
   --message-box-offeset: 2rem;
 
