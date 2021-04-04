@@ -8,7 +8,6 @@ const MESSAGE_TYPES = Object.freeze({
   error: 'error'
 })
 
-
 const createTextObj = (string) => {
   return {
     type: MESSAGE_TYPES.text,
@@ -26,6 +25,10 @@ const createErrorObj = (description, location) => {
   }
 }
 
+const shortenLocationData = (location) => {
+  const regex = /\w*.cmpl.*,/g;
+  return location.match(regex)[0].slice(0, -1);
+}
 
 const initialMessage = [];
 
@@ -38,7 +41,9 @@ const MessageProvider = ({ children }) => {
   }
 
   const addErrorMessage = ({ description, location }) => {
-    const newMessageObj = createErrorObj(description, location);
+    const shortLocation = shortenLocationData(location);
+    const newMessageObj = createErrorObj(description, shortLocation);
+
     setMessages((prevState) => [...prevState, newMessageObj]);
   }
 

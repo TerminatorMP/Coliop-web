@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import * as ace from 'ace-builds';
 
 const EditorContext = React.createContext();
 const { Provider } = EditorContext;
@@ -17,6 +18,11 @@ const EditorCon = ({ children }) => {
     if(editor) {
       editor.setSession(sessionObject);
     }
+  }
+
+  const selectRange = ({ startLine, startChar, endLine, endChar }) => {
+    const Range = ace.Range;
+    editor.selection.setRange(new Range(startLine -1, startChar -1, endLine -1, endChar));
   }
 
   const updateSize = () => {
@@ -48,6 +54,7 @@ const EditorCon = ({ children }) => {
       decreaseZoom,
       undo,
       redo,
+      selectRange,
       updateSize,
       setActiveEditorSession,
     }}>
