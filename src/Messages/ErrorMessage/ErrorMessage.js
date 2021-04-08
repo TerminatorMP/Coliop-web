@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useEditorContext } from '../../contexts/EditorContext';
 
 import styles from './ErrorMessage.module.css';

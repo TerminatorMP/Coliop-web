@@ -1,5 +1,5 @@
-import React, { useCallback } from "react";
-import ErrorMessage from './ErrorMessage/ErrorMessage';
+import React from "react";
+import Content from './Content';
 import { useEditorContext } from '../contexts/EditorContext';
 import { useMessageContext } from '../contexts/MessageContext';
 
@@ -11,7 +11,6 @@ export default function Messages({ parentRef }) {
 
   const [height, setHeight] = React.useState(hightCache);
   const draggerRef = React.useRef(null);
-  const contentRef = React.useRef(null);
 
 
   const draggerHeight = 28;
@@ -31,7 +30,6 @@ export default function Messages({ parentRef }) {
     document.addEventListener("mousemove", calculateHeight);
     document.addEventListener("mouseup", () => {
       document.removeEventListener("mousemove", calculateHeight);
-      scrollToBottom();
     }, { once: true });
   }
 
@@ -46,29 +44,6 @@ export default function Messages({ parentRef }) {
     return () => { updateHightCache(height) }
   }, [updateHightCache, height])
 
-
-  const scrollToBottom = () => {
-    const content = contentRef.current;
-    content.scrollTo(0, content.scrollHeight);
-  }
-
-  React.useEffect(() => {
-    console.log('mounted')
-
-  }, [])
-
-  React.useEffect(() => {
-    scrollToBottom();
-  }, [messages])
-
-  const TextMessage = ({ messageObj }) => {
-    return(
-      <div className={styles["text-message"]}>
-        {messageObj.content}
-      </div>
-    )
-  }
-
   const Dragger = () => {
     return(
       <div ref={draggerRef} className={styles["dragger"]} >
@@ -82,26 +57,10 @@ export default function Messages({ parentRef }) {
     )
   }
 
-  const Content = () => {
-    return(
-      <div ref={contentRef} className={styles["content"]}>
-        {messages.map((messageObj, index) => {
-          if(messageObj.type === 'text') {
-            return <TextMessage key={index} {...{ messageObj }} />
-          }
-          if(messageObj.type === 'error') {
-            return <ErrorMessage key={index} {...{ messageObj }} />
-          }
-          return 'undefined Messagetype'
-        })}
-      </div>
-    )
-  }
-
   return (
     <div style={style} className={styles["resizer"]}>
       <Dragger />
-      <Content />
+      <Content messageData={messages}/>
     </div>
   );
 }
