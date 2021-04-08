@@ -30,6 +30,7 @@ export default function Toolbar({ setMessageObjFromXmlString }) {
 
   const handleErrorMessages = (messageResponse) => {
     const messageDataObj = JSON.parse(convertXmlToJson(messageResponse[2]));
+    console.log("msg", messageDataObj);
     const generalData = messageDataObj.CmplMessages.general;
     if(generalData.generalStatus._text === "error") {
       const messagesData = convertToArray(messageDataObj.CmplMessages.messages.message);

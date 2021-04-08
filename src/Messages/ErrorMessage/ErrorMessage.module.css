@@ -1,0 +1,18 @@
+
+.error-message {
+  margin-top: calc(var(--border-weight) *-1);
+  padding-top: var(--message-padding);
+  padding-bottom: var(--message-padding);
+  padding-left: var(--message-padding);
+  border-top: solid var(--border-weight) var(--message-error);
+  border-bottom: solid var(--border-weight) var(--message-error);
+  color: var(--message-error);
+  background-color: var(--message-error-transparent);
+  z-index: 2;
+  cursor: pointer;
+}
+
+.error-message p {
+  margin-bottom: 1rem;
+  font-weight: 600;
+}

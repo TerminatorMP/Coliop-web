@@ -20,7 +20,15 @@ const EditorCon = ({ children }) => {
     }
   }
 
+  const selectLine = (line) => {
+    editor.selection.moveCursorToPosition({row: line, column: 0});
+    editor.selection.selectLine();
+  }
+
   const selectRange = ({ startLine, startChar, endLine, endChar }) => {
+    if(!endLine && !endChar) {
+      selectLine(startLine);
+    }
     const Range = ace.Range;
     editor.selection.setRange(new Range(startLine -1, startChar -1, endLine -1, endChar));
   }

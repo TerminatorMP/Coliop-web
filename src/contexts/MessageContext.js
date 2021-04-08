@@ -26,14 +26,20 @@ const createErrorObj = (description, location) => {
 }
 
 const shortenLocationData = (location) => {
-  const regex = /\w*.cmpl.*,/g;
-  return location.match(regex)[0].slice(0, -1);
+  const regex = /\w+\.\w+:\d*\.\d*(-\d*(\.\d*)?)?/g;
+  return location.match(regex)[0];
 }
 
 const initialMessage = [];
+const initialConsoleHightInPx = 200;
 
 const MessageProvider = ({ children }) => {
   const [messages, setMessages] = useState(initialMessage);
+  const [hightCache, setHightCache] = useState(initialConsoleHightInPx);
+
+  const updateHightCache = (newHight) => {
+    setHightCache(newHight);
+  }
 
   const addTextMessage = (string) => {
     const newMessageObj = createTextObj(string);
@@ -57,6 +63,8 @@ const MessageProvider = ({ children }) => {
       addTextMessage,
       addErrorMessage,
       clearMessages,
+      hightCache,
+      updateHightCache,
     }}>
       {children}
     </Provider>

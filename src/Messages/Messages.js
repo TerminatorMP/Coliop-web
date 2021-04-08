@@ -1,24 +1,23 @@
-import React from "react";
+import React, { useCallback } from "react";
+import ErrorMessage from './ErrorMessage/ErrorMessage';
 import { useEditorContext } from '../contexts/EditorContext';
 import { useMessageContext } from '../contexts/MessageContext';
 
 import styles from "./Messages.module.css";
 
-const initialConsoleHeightInPx = 200;
-
 export default function Messages({ parentRef }) {
-  const { updateSize, selectRange } = useEditorContext();
-  const { messages, clearMessages } = useMessageContext();
+  const { updateSize } = useEditorContext();
+  const { messages, clearMessages, hightCache, updateHightCache } = useMessageContext();
 
-  const [height, setHeight] = React.useState(initialConsoleHeightInPx);
+  const [height, setHeight] = React.useState(hightCache);
   const draggerRef = React.useRef(null);
+  const contentRef = React.useRef(null);
+
 
   const draggerHeight = 28;
   const style = {
     height: height + "px"
   };
-
-  
 
   const calculateHeight = (event) => {
     const boundryBottom = parentRef.current.getBoundingClientRect().bottom;
@@ -27,11 +26,12 @@ export default function Messages({ parentRef }) {
     setHeight(calculatedHeight < draggerHeight ? draggerHeight : calculatedHeight);
     updateSize();
   };
-
+  
   const handleDragLogic = (event) => {
     document.addEventListener("mousemove", calculateHeight);
     document.addEventListener("mouseup", () => {
       document.removeEventListener("mousemove", calculateHeight);
+      scrollToBottom();
     }, { once: true });
   }
 
@@ -42,35 +42,24 @@ export default function Messages({ parentRef }) {
     return () => draggerElement.removeEventListener("mousedown", handleDragLogic);
   });
 
-  const extractSelectionRange = (location) => {
-    const regExcludeFileName = /:.*/g;
-    const locationWithoutFileName = location.match(regExcludeFileName)[0].slice(1);
-    const regGetAllNumbers = /\d+/g;
-    const locationNumbers = locationWithoutFileName.match(regGetAllNumbers);
-    return locationNumbers;
+  React.useEffect(() => {
+    return () => { updateHightCache(height) }
+  }, [updateHightCache, height])
+
+
+  const scrollToBottom = () => {
+    const content = contentRef.current;
+    content.scrollTo(0, content.scrollHeight);
   }
 
-  const createRangeObject = (sLine, sChar, eLine, eChar) => {
-    return {
-      startLine: sLine,
-      startChar: sChar,
-      endLine: eLine,
-      endChar: eChar,
-    }
-  }
+  React.useEffect(() => {
+    console.log('mounted')
 
-  const markErrorLocation = (location) => {
-    const rangeNumbers = extractSelectionRange(location);
-    let range = {};
-    if(rangeNumbers.length === 3) {
-      range = createRangeObject(rangeNumbers[0], rangeNumbers[1], rangeNumbers[0], rangeNumbers[2]);
-    }
-    if(rangeNumbers.length === 4) {
-      range = createRangeObject(rangeNumbers[0], rangeNumbers[1], rangeNumbers[2], rangeNumbers[3]);
-    }
-    console.log(range); 
-    selectRange(range);
-  }
+  }, [])
+
+  React.useEffect(() => {
+    scrollToBottom();
+  }, [messages])
 
   const TextMessage = ({ messageObj }) => {
     return(
@@ -80,25 +69,9 @@ export default function Messages({ parentRef }) {
     )
   }
 
-  const ErrorMessage = ({ messageObj }) => {
-    const { description, location } = messageObj.content;
-    const handleOnClick = () => {
-      markErrorLocation(location);
-    }
-    return(
-      <div 
-        onClick={handleOnClick} 
-        className={styles["error-message"]}
-      >
-        <p>Error: {description}</p>
-        {location}
-      </div>
-    )
-  }
-
   const Dragger = () => {
     return(
-      <div ref={draggerRef} className={styles["dragger"]}>
+      <div ref={draggerRef} className={styles["dragger"]} >
         <div>
           Konsole
         </div>
@@ -111,13 +84,13 @@ export default function Messages({ parentRef }) {
 
   const Content = () => {
     return(
-      <div className={styles["content"]}>
-        {messages.map((messageObj) => {
+      <div ref={contentRef} className={styles["content"]}>
+        {messages.map((messageObj, index) => {
           if(messageObj.type === 'text') {
-            return <TextMessage {...{ messageObj }} />
+            return <TextMessage key={index} {...{ messageObj }} />
           }
           if(messageObj.type === 'error') {
-            return <ErrorMessage {...{ messageObj }} />
+            return <ErrorMessage key={index} {...{ messageObj }} />
           }
           return 'undefined Messagetype'
         })}
