@@ -1,5 +1,5 @@
 
-const CMPL_SERVER_URL = 'http://localhost:5000';
+const CMPL_SERVER_URL = 'http://127.0.0.1:8000/api';
 
 const header = {
     'Accept': 'application/json',

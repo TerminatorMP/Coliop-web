@@ -32,4 +32,4 @@ function Content({ messageData }) {
   )
 }
 
-export default React.memo(Content);
+export default Content;

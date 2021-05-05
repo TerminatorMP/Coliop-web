@@ -29,6 +29,7 @@
   padding: 1rem 0;
   white-space:pre-wrap;
   overflow: scroll;
+  scroll-behavior: smooth;
 }
 
 .text-message {

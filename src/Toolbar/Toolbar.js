@@ -6,7 +6,6 @@ import { useFilesContext } from '../contexts/FilesContext';
 import { useEditorContext } from '../contexts/EditorContext';
 import { useMessageContext } from '../contexts/MessageContext';
 import Button from '../components/Button/Button';
-import { ServerStatuscodes as status } from '../MagicNumbers';
 
 import { ReactComponent as Add } from '../assets/images/plus.svg'; 
 import { ReactComponent as Back } from '../assets/images/arrow_back.svg';
@@ -16,7 +15,7 @@ import { ReactComponent as ZoomOut } from '../assets/images/zoom_dec.svg';
 
 import styles from './Toolbar.module.css';
 
-export default function Toolbar({ setMessageObjFromXmlString }) {
+export default function Toolbar() {
   const { increaseZoom, decreaseZoom, undo, redo } = useEditorContext();
   const { createFile, activeFile, getContentFromFile, createOrUpdateSolutionFile } = useFilesContext();
   const { addTextMessage, addErrorMessage } = useMessageContext();

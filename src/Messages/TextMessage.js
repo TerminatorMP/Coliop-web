@@ -10,4 +10,4 @@ function TextMessage({ messageObj }){
   )
 }
 
-export default React.memo(TextMessage);
+export default TextMessage;

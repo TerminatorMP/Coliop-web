@@ -2,6 +2,9 @@ import { useState, useEffect } from 'react';
 
 import { useFilesContext } from '../../contexts/FilesContext';
 
+import { ReactComponent as FileImage } from '../../assets/images/file.svg';
+import { ReactComponent as CheckMark } from '../../assets/images/check.svg';
+import { ReactComponent as Pen } from '../../assets/images/pen.svg'; 
 import styles from './NavigationItem.module.css';
 
 export default function NavigationItem({ fileName, selected, setSelected }) {
@@ -41,11 +44,18 @@ export default function NavigationItem({ fileName, selected, setSelected }) {
         </form>
         :
         <div className={styles["file"]}>
-          <div className={styles["name"]}>
-            {fileName}
+          <div className={styles["flex"]}>
+            <div className={selected ? `${styles["icon"]} ${styles["active"]}` : `${styles["icon"]}`}>
+              {fileName === 'Solution' ? 
+                <CheckMark />
+                :
+                <FileImage />
+              }
+            </div>
+            <div className={styles["name"]}>{fileName}</div>
           </div>
           <div className={styles["edit"]} onClick={() => {setEditable(!editable)}}>
-            edit
+            <Pen />
           </div>
         </div>
       }
