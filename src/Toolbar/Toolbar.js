@@ -29,7 +29,6 @@ export default function Toolbar() {
 
   const handleErrorMessages = (messageResponse) => {
     const messageDataObj = JSON.parse(convertXmlToJson(messageResponse[2]));
-    console.log("msg", messageDataObj);
     const generalData = messageDataObj.CmplMessages.general;
     if(generalData.generalStatus._text === "error") {
       const messagesData = convertToArray(messageDataObj.CmplMessages.messages.message);
@@ -69,19 +68,27 @@ export default function Toolbar() {
     }, 300);
   }
 
+  const Icon = ({ children, onClickFunction }) => {
+    return(
+      <div className={styles["icon"]} role="button" onClick={onClickFunction}>
+        {children}
+      </div>
+    )
+  }
+
   return(
     <div className={styles.toolbar}>
       <div className={styles["left"]}>
         <div className={styles["group"]}>
-          <div className={styles["icon"]} role="button" onClick={createFile}><Add /></div>
+          <Icon onClickFunction={createFile}><Add /></Icon>
         </div>
         <div className={styles["group"]}>
-          <div className={styles["icon"]} role="button" onClick={undo}><Back /></div>
-          <div className={styles["icon"]} role="button" onClick={redo}><Forth /></div>
+          <Icon onClickFunction={undo}><Back /></Icon>
+          <Icon onClickFunction={redo}><Forth /></Icon>
         </div>
         <div className={styles["group"]}>
-          <div className={styles["icon"]} role="button" onClick={increaseZoom}><ZoomIn /></div>
-          <div className={styles["icon"]} role="button" onClick={decreaseZoom}><ZoomOut /></div>
+          <Icon onClickFunction={increaseZoom}><ZoomIn /></Icon>
+          <Icon onClickFunction={decreaseZoom}><ZoomOut /></Icon>
         </div>
       </div>
       <div className={styles["right"]}>
@@ -89,7 +96,6 @@ export default function Toolbar() {
           Lösen >
         </Button>
       </div>
-
     </div>
   )
 };

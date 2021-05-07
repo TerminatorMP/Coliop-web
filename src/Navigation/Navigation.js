@@ -8,22 +8,28 @@ import styles from './Navigation.module.css';
 export default function Navigation() {
   const { files, activeFile, changeActiveFile } = useFilesContext();
 
+  const NavigationItemList = ({ fileData }) => {
+    return(
+      fileData.map((file, index) => {
+        return(
+          <NavigationItem 
+            key={index} 
+            fileName={file.name} 
+            selected={file.name === activeFile} 
+            setSelected={changeActiveFile}
+          />
+        );
+      })
+    )
+  }
+
   return(
-    <div className={styles.nav}>
-      <div className={styles.heading}>
+    <div className={styles["nav"]}>
+      <div className={styles["heading"]}>
         Dateien
       </div>
-      <div className={styles.files}>
-        {files.map((file, index) => {
-          return(
-            <NavigationItem 
-              key={index} 
-              fileName={file.name} 
-              selected={file.name === activeFile} 
-              setSelected={changeActiveFile}
-            />
-          );
-        })}
+      <div className={styles["files"]}>
+        <NavigationItemList fileData={files} />
       </div>
     </div>
   )
