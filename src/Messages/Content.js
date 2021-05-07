@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react';
+import Proptypes from 'prop-types';
 
 import ErrorMessage from './ErrorMessage/ErrorMessage';
 import TextMessage from './TextMessage';
@@ -30,6 +31,10 @@ function Content({ messageData }) {
       })}
     </div>
   )
+}
+
+Content.propTypes = {
+  messageData: Proptypes.array.isRequired,
 }
 
 export default Content;

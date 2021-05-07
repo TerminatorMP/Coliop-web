@@ -1,8 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import styles from './GeneralInformation.module.css';
 
-export default function GeneralInformation({generalInformationsObj}) {
+export default function GeneralInformation({ generalInformationsObj, generalSolutionObj }) {
 
   const instanceName = generalInformationsObj.instanceName._text;
   const generalInformationDataObj = [
@@ -38,9 +39,17 @@ export default function GeneralInformation({generalInformationsObj}) {
       desc: "Variablen Anzeigeoptionen:",
       val: generalInformationsObj.variablesDisplayOptions._text,
     },
+    {
+      desc: "Objekt Status:",
+      val: generalSolutionObj.status,
+    },
+    {
+      desc: "Objekt Wert:",
+      val: generalSolutionObj.value,
+    },
   ]
 
-  const GeneralColumn = ({desc, val}) => {
+  function GeneralColumn ({desc, val}){
     return(
       <tr>
         <th>{desc}</th>
@@ -48,13 +57,18 @@ export default function GeneralInformation({generalInformationsObj}) {
       </tr>
     )
   }
+  GeneralColumn.propTypes = {
+    desc: PropTypes.string.isRequired,
+    val: PropTypes.string.isRequired
+  }
 
   return(
     <>
       <h2>{instanceName}</h2>
         <table className={styles["generalTable"]}>
-          {generalInformationDataObj.map(({desc, val}) =>
+          {generalInformationDataObj.map(({desc, val}, index) =>
             <GeneralColumn 
+              key={index}
               desc={desc}
               val={val}
             />
@@ -62,4 +76,8 @@ export default function GeneralInformation({generalInformationsObj}) {
         </table>
     </>
   )
+}
+GeneralInformation.propTypes = {
+  generalInformationsObj: PropTypes.object.isRequired,
+  generalSolutionObj: PropTypes.object.isRequired,
 }

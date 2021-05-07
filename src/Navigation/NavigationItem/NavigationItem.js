@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-
+import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { useFilesContext } from '../../contexts/FilesContext';
 
 import { ReactComponent as FileImage } from '../../assets/images/file.svg';
@@ -61,4 +61,10 @@ export default function NavigationItem({ fileName, selected, setSelected }) {
       }
     </div>
   )
+}
+
+NavigationItem.propTypes = {
+  fileName: PropTypes.string.isRequired,
+  selected: PropTypes.bool.isRequired,
+  setSelected: PropTypes.func.isRequired,
 }

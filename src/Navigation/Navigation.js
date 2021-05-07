@@ -1,4 +1,4 @@
-
+import React from 'react';
 import { useFilesContext } from '../contexts/FilesContext';
 
 import NavigationItem from './NavigationItem/NavigationItem';

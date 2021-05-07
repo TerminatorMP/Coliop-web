@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from 'prop-types';
 import Content from './Content';
 import { useEditorContext } from '../contexts/EditorContext';
 import { useMessageContext } from '../contexts/MessageContext';
@@ -26,7 +27,7 @@ export default function Messages({ parentRef }) {
     updateSize();
   };
   
-  const handleDragLogic = (event) => {
+  const handleDragLogic = () => {
     document.addEventListener("mousemove", calculateHeight);
     document.addEventListener("mouseup", () => {
       document.removeEventListener("mousemove", calculateHeight);
@@ -63,4 +64,8 @@ export default function Messages({ parentRef }) {
       <Content messageData={messages}/>
     </div>
   );
+}
+
+Messages.propTypes = {
+  parentRef: PropTypes.node.isRequired,
 }

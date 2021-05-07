@@ -1,7 +1,6 @@
 import * as ace from 'ace-builds';
 
 ace.define("ace/mode/cmpl_highlight_rules",["require","exports","module","ace/lib/oop","ace/mode/text_highlight_rules"], function(require, exports, module) {
-  "use strict";
   
   var oop = require("../lib/oop");
   var TextHighlightRules = require("./text_highlight_rules").TextHighlightRules;
@@ -68,7 +67,6 @@ ace.define("ace/mode/cmpl_highlight_rules",["require","exports","module","ace/li
   });
   
   ace.define("ace/mode/cmpl",["require","exports","module","ace/lib/oop","ace/mode/text","ace/mode/sql_highlight_rules"], function(require, exports, module) {
-  "use strict";
   
   var oop = require("../lib/oop");
   var TextMode = require("./text").Mode;

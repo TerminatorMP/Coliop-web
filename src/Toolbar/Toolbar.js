@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { createXmlForRequest, convertXmlToJson } from '../api/request-formatter';
 import { fetchJobId, fetchMessages, fetchSolution, fetchSolutionStatus, sendCmplProblem } from '../api/api';
@@ -64,16 +65,20 @@ export default function Toolbar() {
         if(solution[0] !== 7) {
           createOrUpdateSolutionFile(solution[2]);
         }
-      };
+      }
     }, 300);
   }
 
-  const Icon = ({ children, onClickFunction }) => {
+  function Icon ({ children, onClickFunction }) {
     return(
       <div className={styles["icon"]} role="button" onClick={onClickFunction}>
         {children}
       </div>
     )
+  }
+  Icon.propTypes = {
+    children: PropTypes.element.isRequired,
+    onClickFunction: PropTypes.func.isRequired,
   }
 
   return(
@@ -93,9 +98,9 @@ export default function Toolbar() {
       </div>
       <div className={styles["right"]}>
         <Button onClick={makeRequest}>
-          Lösen >
+          Lösen &gt;
         </Button>
       </div>
     </div>
   )
-};
+}
