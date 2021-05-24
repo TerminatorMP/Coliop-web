@@ -30,18 +30,31 @@ export default function NavigationItem({ fileName, selected, setSelected }) {
     setValue(event.target.value);
   }
 
+  const ChangeFileName = () => {
+    return(
+      <form className={styles["filename_form"]} onSubmit={handleSubmit}>
+        <input 
+          className={styles["filename_input"]}
+          type="text" 
+          value={value} 
+          onChange={handleChange} 
+        />
+        <input 
+          className={styles["filename_submit"]} 
+          type="submit" 
+          value="Fertig" 
+        />
+      </form>
+    )
+  }
+
   return(
     <div 
       className={selected ? `${styles["item"]} ${styles["active"]}` : `${styles["item"]}`}
       onClick={handleClick}
     >
       {(editable) ? 
-        <form onSubmit={handleSubmit}>
-          <label>
-            <input type="text" value={value} onChange={handleChange} />
-          </label>
-          <input type="submit" value="Submit" />
-        </form>
+        <ChangeFileName />
         :
         <div className={styles["file"]}>
           <div className={styles["flex"]}>

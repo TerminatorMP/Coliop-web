@@ -6,7 +6,6 @@ import GeneralInformation from './GeneralInformation/GeneralInformation';
 
 import styles from './Solution.module.css';
 
-
 export default function Solution({ solutionXmlString }) {
   const solutionJson = convertXmlToJson(solutionXmlString);
   const data = JSON.parse(solutionJson);
