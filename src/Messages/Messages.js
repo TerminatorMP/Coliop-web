@@ -4,7 +4,7 @@ import Content from './Content';
 import { useEditorContext } from '../contexts/EditorContext';
 import { useMessageContext } from '../contexts/MessageContext';
 
-import styles from "./Messages.module.css";
+import styles from "./Messages.module.scss";
 
 export default function Messages({ parentRef }) {
   const { updateSize } = useEditorContext();

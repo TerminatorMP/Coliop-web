@@ -1,6 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-import styles from './Messages.module.css';
+import styles from './Messages.module.scss';
 
 function TextMessage({ messageObj }){
   return(
@@ -8,6 +9,11 @@ function TextMessage({ messageObj }){
       {messageObj.content}
     </div>
   )
+}
+TextMessage.propTypes = {
+  messageObj: PropTypes.shape({
+    content: PropTypes.string,
+  })
 }
 
 export default TextMessage;

@@ -1,4 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import * as Ace from 'ace-builds';
 
 import { useEditorContext } from './EditorContext';
@@ -89,7 +90,7 @@ const Files = ({ children }) => {
     let newFiles = files.map((file) => {
       if(file.name === currentFilename) {
         return createFileObject(newFilename, file.content, file.type);
-      };
+      }
       return file;
     });
     setFiles(newFiles);
@@ -100,7 +101,7 @@ const Files = ({ children }) => {
     let newFiles = files.map((file) => {
       if(file.name === fileName) {
         return createFileObject(fileName, newFileContent, file.type);
-      };
+      }
       return file;
     });
     setFiles(newFiles);
@@ -120,6 +121,9 @@ const Files = ({ children }) => {
       {children}
     </Provider>
   )
+}
+Files.propTypes = {
+  children: PropTypes.element,
 }
 const useFilesContext = () => useContext(FilesContext);
 

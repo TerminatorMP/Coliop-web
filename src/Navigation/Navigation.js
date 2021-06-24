@@ -3,7 +3,7 @@ import { useFilesContext } from '../contexts/FilesContext';
 
 import NavigationItem from './NavigationItem/NavigationItem';
 
-import styles from './Navigation.module.css';
+import styles from './Navigation.module.scss';
 
 export default function Navigation() {
   const { files, activeFile, changeActiveFile } = useFilesContext();

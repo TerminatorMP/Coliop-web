@@ -4,7 +4,7 @@ import Proptypes from 'prop-types';
 import ErrorMessage from './ErrorMessage/ErrorMessage';
 import TextMessage from './TextMessage';
 
-import styles from './Messages.module.css';
+import styles from './Messages.module.scss';
 
 function Content({ messageData }) {
   const contentRef = useRef(null);

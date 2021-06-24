@@ -1,4 +1,5 @@
 import React, { useContext, useState } from 'react';
+import PropTypes from 'prop-types';
 
 const MessageContext = React.createContext();
 const { Provider } = MessageContext;
@@ -69,6 +70,9 @@ const MessageProvider = ({ children }) => {
       {children}
     </Provider>
   )
+}
+MessageProvider.propTypes = {
+  children: PropTypes.element,
 }
 
 const useMessageContext = () => useContext(MessageContext);

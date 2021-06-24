@@ -14,7 +14,7 @@ import { ReactComponent as Forth } from '../assets/images/arrow_forth.svg';
 import { ReactComponent as ZoomIn } from '../assets/images/zoom_inc.svg';
 import { ReactComponent as ZoomOut } from '../assets/images/zoom_dec.svg'; 
 
-import styles from './Toolbar.module.css';
+import styles from './Toolbar.module.scss';
 
 export default function Toolbar() {
   const { increaseZoom, decreaseZoom, undo, redo } = useEditorContext();

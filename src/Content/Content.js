@@ -7,7 +7,7 @@ import Messages from '../Messages/Messages';
 import { useFilesContext } from '../contexts/FilesContext';
 import { MessageProvider } from '../contexts/MessageContext';
 
-import styles from './Content.module.css';
+import styles from './Content.module.scss';
 
 
 export default function Content() {

@@ -1,9 +1,10 @@
-import {useRef, useEffect} from 'react';
+import React, {useRef, useEffect} from 'react';
+import PropTypes from 'prop-types';
 import AceEditor from "react-ace";
 
 import { useEditorContext } from '../contexts/EditorContext';
 
-import styles from './Editor.module.css';
+import styles from './Editor.module.scss';
  
 import "../ace-modifier/cmpl-mode";
 import "ace-builds/src-noconflict/theme-monokai";
@@ -37,4 +38,7 @@ export default function Editor({ displayed }) {
       />
     </div>
   )
+}
+Editor.propTypes = {
+  displayed: PropTypes.bool.isRequired,
 }

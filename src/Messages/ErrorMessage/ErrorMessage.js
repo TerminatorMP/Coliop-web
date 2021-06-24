@@ -1,7 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { useEditorContext } from '../../contexts/EditorContext';
 
-import styles from './ErrorMessage.module.css';
+import styles from './ErrorMessage.module.scss';
 
 
 const extractSelectionRange = (location) => {
@@ -49,4 +50,12 @@ export default function ErrorMessage({ messageObj }) {
       {location}
     </div>
   )
+}
+ErrorMessage.propTypes = {
+  messageObj: PropTypes.shape({
+    content: PropTypes.shape({
+      description: PropTypes.string,
+      location: PropTypes.string,
+    })
+  })
 }

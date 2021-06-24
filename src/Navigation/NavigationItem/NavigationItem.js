@@ -5,7 +5,7 @@ import { useFilesContext } from '../../contexts/FilesContext';
 import { ReactComponent as FileImage } from '../../assets/images/file.svg';
 import { ReactComponent as CheckMark } from '../../assets/images/check.svg';
 import { ReactComponent as Pen } from '../../assets/images/pen.svg'; 
-import styles from './NavigationItem.module.css';
+import styles from './NavigationItem.module.scss';
 
 export default function NavigationItem({ fileName, selected, setSelected }) {
   const { changeFilename } = useFilesContext();

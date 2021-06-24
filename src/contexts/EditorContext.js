@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import PropTypes from 'prop-types';
 import * as ace from 'ace-builds';
 
 const EditorContext = React.createContext();
@@ -70,6 +71,10 @@ const EditorCon = ({ children }) => {
     </Provider>
   )
 }
+EditorCon.propTypes = {
+  children: PropTypes.element,
+}
+
 const useEditorContext = () => useContext(EditorContext);
 
 export { EditorCon, useEditorContext }
