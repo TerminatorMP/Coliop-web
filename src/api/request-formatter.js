@@ -15,13 +15,13 @@ const createXmlForRequest = (fileName, jobId, problemString) => {
       general: {
         name: fileName,
         jobId: jobId,
+        preComp: "yes",
       },
       problemFiles: {
         file: [
           {
             _attributes: {
               name: fileName,
-              type: 'cmplMain',
             },
             _text: problemString,
           },

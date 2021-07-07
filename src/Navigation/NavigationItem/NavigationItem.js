@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { useFilesContext } from '../../contexts/FilesContext';
+
+import ChangeFileName from './ChangeFileName';
 
 import { ReactComponent as FileImage } from '../../assets/images/file.svg';
 import { ReactComponent as CheckMark } from '../../assets/images/check.svg';
@@ -8,44 +9,10 @@ import { ReactComponent as Pen } from '../../assets/images/pen.svg';
 import styles from './NavigationItem.module.scss';
 
 export default function NavigationItem({ fileName, selected, setSelected }) {
-  const { changeFilename } = useFilesContext();
   const [editable, setEditable] = useState(false);
-  const [value, setValue] = useState("");
-
-  useEffect(() => {
-    setValue(fileName);
-  }, []);
 
   const handleClick = () => {
     setSelected(fileName);
-  }
-
-  const handleSubmit = (event) => {
-    changeFilename(fileName, value);
-    setEditable(!editable);
-    event.preventDefault();
-  }
-
-  const handleChange = (event) => {
-    setValue(event.target.value);
-  }
-
-  const ChangeFileName = () => {
-    return(
-      <form className={styles["filename_form"]} onSubmit={handleSubmit}>
-        <input 
-          className={styles["filename_input"]}
-          type="text" 
-          value={value} 
-          onChange={handleChange} 
-        />
-        <input 
-          className={styles["filename_submit"]} 
-          type="submit" 
-          value="Fertig" 
-        />
-      </form>
-    )
   }
 
   return(
@@ -54,7 +21,10 @@ export default function NavigationItem({ fileName, selected, setSelected }) {
       onClick={handleClick}
     >
       {(editable) ? 
-        <ChangeFileName />
+        <ChangeFileName 
+          fileName={fileName}
+          setEditable={setEditable}
+        />
         :
         <div className={styles["file"]}>
           <div className={styles["flex"]}>
@@ -67,7 +37,7 @@ export default function NavigationItem({ fileName, selected, setSelected }) {
             </div>
             <div className={styles["name"]}>{fileName}</div>
           </div>
-          <div className={styles["edit"]} onClick={() => {setEditable(!editable)}}>
+          <div className={styles["edit"]} onClick={() => {setEditable(true)}}>
             <Pen />
           </div>
         </div>
