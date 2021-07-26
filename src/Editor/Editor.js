@@ -8,18 +8,28 @@ import styles from './Editor.module.scss';
  
 import "../ace-modifier/cmpl-mode";
 import "ace-builds/src-noconflict/theme-monokai";
+
+import EditorCompiler from '../helper/EditorCompiler';
  
-function onChange(newValue) {
-  console.log("change", newValue);
-}
 
 export default function Editor({ displayed }) {
   const { setEditorRef } = useEditorContext();
   const aceRef = useRef(null);
-
+  
+  const compiler = new EditorCompiler();
+  
   useEffect(() => {
     setEditorRef(aceRef.current.editor);
   });
+
+  useEffect(() => {
+    console.log('Editor mounted');
+  }, [])
+  
+  const onChange = (newValue) => {
+    console.log("change", newValue);
+    compiler.check(newValue);
+  }
 
   return(
     <div 

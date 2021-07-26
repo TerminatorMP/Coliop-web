@@ -12,6 +12,10 @@ const Files = ({ children }) => {
   const [activeFile, setActiveFile] = useState('');
   const [files, setFiles] = useState([]);
   const [fileCounter, setFileCounter] = useState(1);
+  
+  useEffect(() => {
+    createFile();
+  }, [])
 
   useEffect(() => {
     if(activeFile !== 'Solution' && activeFile !== 'Ausgabe') {
@@ -20,14 +24,6 @@ const Files = ({ children }) => {
       console.log('cmpl Session set')
     }
   }, [activeFile])
-
-  useEffect(() => {
-    console.log('files updated',files);
-  }, [files])
-
-  useEffect(() => {
-    createFile();
-  }, [])
 
   const addFile = (newFile) => {
     setFiles((prevState) => [...prevState, newFile]);
@@ -87,13 +83,13 @@ const Files = ({ children }) => {
   }
 
   const changeFilename = (currentFilename, newFilename) => {
-    let newFiles = files.map((file) => {
+    let updatedFiles = files.map((file) => {
       if(file.name === currentFilename) {
         return createFileObject(newFilename, file.content, file.type);
       }
       return file;
     });
-    setFiles(newFiles);
+    setFiles(updatedFiles);
     changeActiveFile(newFilename);
   }
 
