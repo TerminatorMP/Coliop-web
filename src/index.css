@@ -1,0 +1,41 @@
+:root {
+  --primary: #0298EE;
+  --secondary: #00ffee;
+  --signal: #d0ff006c;
+  --bg-dark: #030303;
+  --bg-dark-2: #252525;
+  --border: #9b9b9b63;
+  --border-weight: 1px;
+
+  --white: #e3e3e3;
+
+  --text-light: #c0c0c0;
+  --text-darken: #a8a8a8;
+  --text-green: #00ff0da9;
+
+  
+  --message-error: #cf4f4f;
+  --message-error-transparent: #68171744;
+
+  --message-box-offeset: 2rem;
+
+  --header-height: 7rem;
+  --toolbar-height: 6rem;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-family: 'Helvetica','Arial', 'sans-serif';
+  font-size: 62.5%;
+  background-color: var(--bg-dark);
+}
+
+.main {
+  display: flex;
+  width: 100%;
+}
