@@ -15,13 +15,13 @@ export default function FileFactory() {
   }
 
   const createCmplFile = (name: string, content: any) => {
-    const type = FileTypes.cmpl;
+    const type = FileTypes.CMPL;
     return createFileObject(name, content, type);
   }
 
   const createSolutionFile = (content: any) => {
     const name = 'Solution';
-    const type = FileTypes.solution;
+    const type = FileTypes.SOLUTION;
     return createFileObject(name, content, type);
   }
 

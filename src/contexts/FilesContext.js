@@ -61,7 +61,7 @@ const Files = ({ children }) => {
   const createFile = () => {
     const fileName = 'Datei' + fileCounter + '.cmpl';
     const fileContent = Ace.createEditSession("Neue Datei", 'ace/mode/cmpl');
-    const fileType = 'editorFile'
+    const fileType = 'cmpl'
     const newFileObject = createFileObject(fileName, fileContent, fileType);
 
     setFileCounter(fileCounter + 1);

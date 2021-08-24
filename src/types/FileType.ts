@@ -1,6 +1,6 @@
 export enum FileTypes {
-  cmpl = 'cmpl',
-  solution = 'sol',
+  CMPL = 'cmpl',
+  SOLUTION = 'sol',
 }
 
 export type File = {
