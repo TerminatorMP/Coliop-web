@@ -1,12 +1,13 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import { createXmlForRequest, convertXmlToJson } from '../api/request-formatter';
 import { fetchJobId, fetchMessages, fetchSolution, fetchSolutionStatus, sendCmplProblem } from '../api/api';
 import { useFilesContext } from '../contexts/FilesContext';
 import { useEditorContext } from '../contexts/EditorContext';
 import { useMessageContext } from '../contexts/MessageContext';
+
 import Button from '../components/Button/Button';
+import Downloader from '../components/Downloader/Downloader';
 
 import { ReactComponent as Add } from '../assets/images/plus.svg'; 
 import { ReactComponent as Back } from '../assets/images/arrow_back.svg';
@@ -16,21 +17,28 @@ import { ReactComponent as ZoomOut } from '../assets/images/zoom_dec.svg';
 
 import styles from './Toolbar.module.scss';
 
+
+type IconPropTypes = {
+  children: React.ReactNode,
+  onClickFunction: React.MouseEventHandler<HTMLDivElement>,
+}
+
 export default function Toolbar() {
   const { increaseZoom, decreaseZoom, undo, redo } = useEditorContext();
   const { createFile, activeFile, getContentFromFile, createOrUpdateSolutionFile } = useFilesContext();
   const { addTextMessage, addErrorMessage } = useMessageContext();
 
-  const convertToArray = (object) => {
+  const convertToArray = (object: object | Array<any>) => {
     if(Array.isArray(object)) {
       return object;
     }
     return [object];
   }
 
-  const handleErrorMessages = (messageResponse) => {
+  const handleErrorMessages = (messageResponse: Array<number | string>) => {
     const messageDataObj = JSON.parse(convertXmlToJson(messageResponse[2]));
     const generalData = messageDataObj.CmplMessages.general;
+
     if(generalData.generalStatus._text === "error") {
       const messagesData = convertToArray(messageDataObj.CmplMessages.messages.message);
       messagesData.forEach((message) => {
@@ -42,7 +50,6 @@ export default function Toolbar() {
       })
     }
   }
-
       
   const makeRequest = async () => {
     const fileName = activeFile;
@@ -69,21 +76,17 @@ export default function Toolbar() {
     }, 300);
   }
 
-  function Icon ({ children, onClickFunction }) {
+  function Icon ({ children, onClickFunction }: IconPropTypes) {
     return(
       <div className={styles["icon"]} role="button" onClick={onClickFunction}>
         {children}
       </div>
     )
   }
-  Icon.propTypes = {
-    children: PropTypes.element.isRequired,
-    onClickFunction: PropTypes.func.isRequired,
-  }
 
-  return(
-    <div className={styles.toolbar}>
-      <div className={styles["left"]}>
+  const LeftSide = () => {
+    return(
+      <>
         <div className={styles["group"]}>
           <Icon onClickFunction={createFile}><Add /></Icon>
         </div>
@@ -95,10 +98,19 @@ export default function Toolbar() {
           <Icon onClickFunction={increaseZoom}><ZoomIn /></Icon>
           <Icon onClickFunction={decreaseZoom}><ZoomOut /></Icon>
         </div>
+        <Downloader />
+      </>
+    )
+  }
+
+  return(
+    <div className={styles.toolbar}>
+      <div className={styles["left"]}>
+        <LeftSide />
       </div>
       <div className={styles["right"]}>
         <Button onClick={makeRequest}>
-          Lösen &gt;
+          <span>Lösen &gt;</span>
         </Button>
       </div>
     </div>

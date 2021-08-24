@@ -7,7 +7,7 @@ export default function FileFactory() {
     content: any, 
     type: FileTypes
     ): File => {
-    return <File>{
+    return {
       name: name,
       content: content,
       type: type,
