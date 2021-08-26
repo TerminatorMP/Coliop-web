@@ -8,7 +8,7 @@ ace.define("ace/mode/cmpl_highlight_rules",["require","exports","module","ace/li
   
   var CmplHighlightRules = function() {
   
-      const sectionMarkers = '(parameters|variables|objectives|constraints):';
+      const sectionMarkers = '(parameters|variables|objectives|constraints|par|var|obj|const):';
       const variables = ('real|integer|binary|string|set');
       const functionParameter = ('max|min|count|format|type|in|len|defset|sum');
       const mathematicalFunctions = ('sqrt|exp|ln|lg|ld|srand|rand|'+

@@ -9,21 +9,20 @@ import { useMessageContext } from '../contexts/MessageContext';
 import Button from '../components/Button/Button';
 import Downloader from '../components/Downloader/Downloader';
 
-import { ReactComponent as Add } from '../assets/images/plus.svg'; 
-import { ReactComponent as Back } from '../assets/images/arrow_back.svg';
-import { ReactComponent as Forth } from '../assets/images/arrow_forth.svg';
-import { ReactComponent as ZoomIn } from '../assets/images/zoom_inc.svg';
-import { ReactComponent as ZoomOut } from '../assets/images/zoom_dec.svg'; 
-
+import { icons } from './icons';
 import styles from './Toolbar.module.scss';
-
 
 type IconPropTypes = {
   children: React.ReactNode,
-  onClickFunction: React.MouseEventHandler<HTMLDivElement>,
+  action: React.MouseEventHandler<HTMLDivElement>,
+}
+
+type GroupPropTypes = {
+  children: React.ReactNode,
 }
 
 export default function Toolbar() {
+  const { Add, Back, Forth, ZoomIn, ZoomOut } = icons;
   const { increaseZoom, decreaseZoom, undo, redo } = useEditorContext();
   const { createFile, activeFile, getContentFromFile, createOrUpdateSolutionFile } = useFilesContext();
   const { addTextMessage, addErrorMessage } = useMessageContext();
@@ -76,9 +75,17 @@ export default function Toolbar() {
     }, 300);
   }
 
-  function Icon ({ children, onClickFunction }: IconPropTypes) {
+  function Icon ({ children, action }: IconPropTypes) {
     return(
-      <div className={styles["icon"]} role="button" onClick={onClickFunction}>
+      <div className={styles["icon"]} role="button" onClick={action}>
+        {children}
+      </div>
+    )
+  }
+
+  const Group = ({ children }: GroupPropTypes) => {
+    return(
+      <div className={styles["group"]}>
         {children}
       </div>
     )
@@ -86,33 +93,39 @@ export default function Toolbar() {
 
   const LeftSide = () => {
     return(
-      <>
-        <div className={styles["group"]}>
-          <Icon onClickFunction={createFile}><Add /></Icon>
-        </div>
-        <div className={styles["group"]}>
-          <Icon onClickFunction={undo}><Back /></Icon>
-          <Icon onClickFunction={redo}><Forth /></Icon>
-        </div>
-        <div className={styles["group"]}>
-          <Icon onClickFunction={increaseZoom}><ZoomIn /></Icon>
-          <Icon onClickFunction={decreaseZoom}><ZoomOut /></Icon>
-        </div>
-        <Downloader />
-      </>
+      <div className={styles["left"]}>
+        <Group>
+          <Icon action={createFile}><Add /></Icon>
+        </Group>
+        <Group>
+          <Icon action={undo}><Back /></Icon>
+          <Icon action={redo}><Forth /></Icon>
+        </Group>
+        <Group>
+          <Icon action={increaseZoom}><ZoomIn /></Icon>
+          <Icon action={decreaseZoom}><ZoomOut /></Icon>
+        </Group>
+        <Group>
+          <Downloader />
+        </Group>
+      </div>
     )
   }
 
-  return(
-    <div className={styles.toolbar}>
-      <div className={styles["left"]}>
-        <LeftSide />
-      </div>
+  const RightSide = () => {
+    return(
       <div className={styles["right"]}>
         <Button onClick={makeRequest}>
           <span>Lösen &gt;</span>
         </Button>
       </div>
+    )
+  }
+
+  return(
+    <div className={styles.toolbar}>
+      <LeftSide />
+      <RightSide />
     </div>
   )
 }

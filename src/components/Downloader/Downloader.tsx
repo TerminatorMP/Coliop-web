@@ -1,5 +1,5 @@
 /* eslint no-unused-vars: 0 */
-import React from 'react';
+import React, { useEffect, useRef }from 'react';
 
 import { useFilesContext } from '../../contexts/FilesContext';
 
@@ -10,10 +10,10 @@ export default function Downloader (){
   const { files } = useFilesContext();
 
   const [downloadURL, setDownloadURL] = React.useState<string>('');
-  const doFileDownload = React.useRef<HTMLAnchorElement>(null);
+  const doFileDownload = useRef<HTMLAnchorElement>(null);
 
 
-  React.useEffect(() => {
+  useEffect(() => {
     if(downloadURL !== '') {
       doFileDownload?.current?.click();
       URL.revokeObjectURL(downloadURL);
@@ -22,7 +22,7 @@ export default function Downloader (){
   }, [downloadURL]);
 
 
-  const convertFileSessions = () => {
+  const convertFileSessionsToStrings = () => {
     const downloadableArrayOfFiles = files.map((file: File) => {
       if(file.type === FileTypes.CMPL) {
         const newFile: File = { ...file, content: file.content.getValue() }
@@ -33,14 +33,15 @@ export default function Downloader (){
     return downloadableArrayOfFiles;
   }
   
-  const handleClick = (event:any) => {
+  const handleClick = (event: any) => {
     event.preventDefault();
-    const data = convertFileSessions();
+
+    const data = convertFileSessionsToStrings();
     const filesAsJson = JSON.stringify({files: data}, null, 4);
+
     const blob = new Blob([filesAsJson]);
     const url = URL.createObjectURL(blob);
     setDownloadURL(url);
-    console.log('clicked');
   }
 
   return(
@@ -54,7 +55,7 @@ export default function Downloader (){
       <a 
         ref={doFileDownload}
         style={{display: 'none'}}
-        download="project.json"
+        download="project.cmpl"
         href={downloadURL}
       />
     </>
