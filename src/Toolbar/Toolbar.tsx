@@ -8,21 +8,38 @@ import { useMessageContext } from '../contexts/MessageContext';
 
 import Button from '../components/Button/Button';
 import Downloader from '../components/Downloader/Downloader';
+import Uploader from '../components/Uploader/Uploader';
 
 import { icons } from './icons';
 import styles from './Toolbar.module.scss';
 
 type IconPropTypes = {
   children: React.ReactNode,
-  action: React.MouseEventHandler<HTMLDivElement>,
+  action?: React.MouseEventHandler<HTMLDivElement>,
 }
 
 type GroupPropTypes = {
   children: React.ReactNode,
 }
 
+const Icon = ({ children, action }: IconPropTypes) => {
+  return(
+    <div className={styles["icon"]} role="button" onClick={action}>
+      {children}
+    </div>
+  )
+}
+
+const Group = ({ children }: GroupPropTypes) => {
+  return(
+    <div className={styles["group"]}>
+      {children}
+    </div>
+  )
+}
+
 export default function Toolbar() {
-  const { Add, Back, Forth, ZoomIn, ZoomOut } = icons;
+  const { Add, Back, Forth, ZoomIn, ZoomOut, Download } = icons;
   const { increaseZoom, decreaseZoom, undo, redo } = useEditorContext();
   const { createFile, activeFile, getContentFromFile, createOrUpdateSolutionFile } = useFilesContext();
   const { addTextMessage, addErrorMessage } = useMessageContext();
@@ -75,21 +92,7 @@ export default function Toolbar() {
     }, 300);
   }
 
-  function Icon ({ children, action }: IconPropTypes) {
-    return(
-      <div className={styles["icon"]} role="button" onClick={action}>
-        {children}
-      </div>
-    )
-  }
-
-  const Group = ({ children }: GroupPropTypes) => {
-    return(
-      <div className={styles["group"]}>
-        {children}
-      </div>
-    )
-  }
+  
 
   const LeftSide = () => {
     return(
@@ -106,7 +109,8 @@ export default function Toolbar() {
           <Icon action={decreaseZoom}><ZoomOut /></Icon>
         </Group>
         <Group>
-          <Downloader />
+          <Downloader><Icon><Download /></Icon></Downloader>
+          <Uploader><span>UPLOADER</span></Uploader>
         </Group>
       </div>
     )

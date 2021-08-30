@@ -31,6 +31,8 @@ export default function Content() {
     <div ref={contentRef} className={styles["content"]}>
       <MessageProvider>
         {displayComponetsBasedOnActiveFile()}
+        
+        {/* Only use set display none for the editor bc the editsession gets corrupted if editor dismounts  */}
         <Editor displayed={activeFile !== 'Solution'} />
         <div className={styles["spacer"]}/>
 

@@ -9,7 +9,6 @@ import styles from './Solution.module.css';
 export default function Solution({ solutionXmlString }) {
   const solutionJson = convertXmlToJson(solutionXmlString);
   const data = JSON.parse(solutionJson);
-  console.log(solutionJson);
 
   const variableDataArray = data?.CmplSolutions.solution.variables.variable;
   const constraintsDataArray = data.CmplSolutions.solution.linearConstraints.constraint;

@@ -3,10 +3,15 @@ import React, { useEffect, useRef }from 'react';
 
 import { useFilesContext } from '../../contexts/FilesContext';
 
+import { File, FileTypes } from '../../types/FileType';
+
 import styles from './Downloader.module.scss';
 
-import { File, FileTypes } from '../../types/FileType';
-export default function Downloader (){
+type DownloaderPropTypes = {
+  children: React.ReactNode,
+}
+
+export default function Downloader ({ children }: DownloaderPropTypes){
   const { files } = useFilesContext();
 
   const [downloadURL, setDownloadURL] = React.useState<string>('');
@@ -20,7 +25,6 @@ export default function Downloader (){
       setDownloadURL('');
     }
   }, [downloadURL]);
-
 
   const convertFileSessionsToStrings = () => {
     const downloadableArrayOfFiles = files.map((file: File) => {
@@ -39,23 +43,23 @@ export default function Downloader (){
     const data = convertFileSessionsToStrings();
     const filesAsJson = JSON.stringify({files: data}, null, 4);
 
-    const blob = new Blob([filesAsJson]);
+    const blob = new Blob([filesAsJson], {type:"application/json"});
     const url = URL.createObjectURL(blob);
     setDownloadURL(url);
   }
 
   return(
     <>
-      <div 
+      <div
         className={styles["downloader"]}
         onClick={handleClick}
       >
-        download now
+        {children}
       </div>
       <a 
         ref={doFileDownload}
         style={{display: 'none'}}
-        download="project.cmpl"
+        download="project.json"
         href={downloadURL}
       />
     </>
