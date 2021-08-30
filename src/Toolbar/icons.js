@@ -4,6 +4,7 @@ import { ReactComponent as ForthIcon } from '../assets/images/arrow_forth.svg';
 import { ReactComponent as ZoomInIcon } from '../assets/images/zoom_inc.svg';
 import { ReactComponent as ZoomOutIcon } from '../assets/images/zoom_dec.svg'; 
 import { ReactComponent as DownloadIcon } from '../assets/images/download.svg';
+import { ReactComponent as UploadIcon } from '../assets/images/upload.svg';
 
 
 export const icons = {
@@ -13,4 +14,5 @@ export const icons = {
   ZoomIn: ZoomInIcon,
   ZoomOut: ZoomOutIcon,
   Download: DownloadIcon,
+  Upload: UploadIcon,
 }

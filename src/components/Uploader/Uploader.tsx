@@ -14,7 +14,7 @@ type UploaderPropTypes = {
 export default function Uploader({ children }: UploaderPropTypes) {
   const doFileUpload = React.useRef<HTMLInputElement>(null);
 
-  const { setFiles } = useFilesContext();
+  const { setFiles, changeActiveFile } = useFilesContext();
 
   const importUploadedFiles = (loadedFiles: File[]) => {
     const convertedFiles = loadedFiles.map((file) => {
@@ -24,8 +24,9 @@ export default function Uploader({ children }: UploaderPropTypes) {
       }
       return file;
     })
-    console.log(convertedFiles);
+    
     setFiles(convertedFiles);
+    changeActiveFile(convertedFiles[0].name);
   }
 
   const handleClick = (event: any) => {

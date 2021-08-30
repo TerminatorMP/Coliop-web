@@ -39,7 +39,7 @@ const Group = ({ children }: GroupPropTypes) => {
 }
 
 export default function Toolbar() {
-  const { Add, Back, Forth, ZoomIn, ZoomOut, Download } = icons;
+  const { Add, Back, Forth, ZoomIn, ZoomOut, Download, Upload } = icons;
   const { increaseZoom, decreaseZoom, undo, redo } = useEditorContext();
   const { createFile, activeFile, getContentFromFile, createOrUpdateSolutionFile } = useFilesContext();
   const { addTextMessage, addErrorMessage } = useMessageContext();
@@ -110,7 +110,7 @@ export default function Toolbar() {
         </Group>
         <Group>
           <Downloader><Icon><Download /></Icon></Downloader>
-          <Uploader><span>UPLOADER</span></Uploader>
+          <Uploader><Icon><Upload /></Icon></Uploader>
         </Group>
       </div>
     )
